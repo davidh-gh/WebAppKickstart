@@ -1,0 +1,48 @@
+bin/
+obj/
+libs/
+package/
+
+# Visual Studio Code
+.vscode
+
+# Rider
+.idea
+
+*.cache
+# *.nupkg
+*.pdb
+*.trx
+src/**/*.dll
+*.zip
+*DotSettings.user
+*.pyc
+*.user
+*.suo
+*.ignore
+
+**/packages
+src/TestResults/*
+src/Help/*
+XsdSchemaFetcher/SchemaFetcher/packages/*
+
+.vs/**
+**/.vs/**
+**/.sonarqube/**
+**/.sonarlint/**
+**/TestResults/**
+
+.nuget/**
+
+packages/**
+**/Logs
+**/Help
+
+UpgradeLog.htm
+
+coverage.opencover.xml
+coverage.xml
+
+# dotCover output
+dotCover.Output.*
+/dotCover.Output

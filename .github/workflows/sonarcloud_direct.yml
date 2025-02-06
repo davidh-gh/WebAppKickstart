@@ -70,7 +70,6 @@ jobs:
           sudo apt install radare2
           dotnet msbuild net9/KickstartApp/KickstartApp.sln
           echo "cat"
-          cat net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.deps.json | grep "version"
           echo "csproj msbuild"
           dotnet msbuild net9/KickstartApp/KickstartMvc/KickstartMvc.csproj -nologo -t:GetAssemblyVersion
           echo "sln msbuild"

@@ -62,8 +62,11 @@ jobs:
 
       - name: Extract Assembly Version
         id: get_version
-        run: echo "VERSION=$(dotnet msbuild -nologo -t:GetAssemblyVersion -p:TargetFramework=net9.0 -p:Configuration=Release -p:OutputPath=./output | grep 'AssemblyVersion' | sed 's/.*AssemblyVersion=//')" >> $GITHUB_OUTPUT
-      
+        run: |
+          VERSION=$(dotnet msbuild net9/KickstartApp/KickstartApp.sln -nologo -t:GetAssemblyVersion -p:TargetFramework=net9.0 -p:Configuration=Release -p:OutputPath=./output | grep 'AssemblyVersion' | sed 's/.*AssemblyVersion=//')
+          echo "VERSION=$VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
       - name: SonarScanner Begin
         run: dotnet sonarscanner begin /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /o:"armaita" /v:"${{ steps.get_version.outputs.VERSION }}"
 

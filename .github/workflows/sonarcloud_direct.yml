@@ -69,9 +69,11 @@ jobs:
           ls -la
           sudo apt install radare2
           dotnet msbuild net9/KickstartApp/KickstartApp.sln
-          strings net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.dll | grep -i "AssemblyVersion"
+          echo "cat"
           cat net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.deps.json | grep "version"
+          echo "csproj msbuild"
           dotnet msbuild net9/KickstartApp/KickstartMvc/KickstartMvc.csproj -nologo -t:GetAssemblyVersion
+          echo "sln msbuild"
           VERSION=$(dotnet msbuild net9/KickstartApp/KickstartApp.sln -nologo -t:GetAssemblyVersion -p:TargetFramework=net9.0 -p:Configuration=Release -p:OutputPath=./output | grep 'AssemblyVersion' | sed 's/.*AssemblyVersion=//')
           echo "VERSION=$VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT

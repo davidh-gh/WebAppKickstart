@@ -72,5 +72,8 @@ jobs:
       - name: Build Solution
         run: dotnet build net9/KickstartApp/KickstartApp.sln
 
+      - name: Test
+        run: dotnet test net9/KickstartApp/KickstartApp.sln --no-build --verbosity normal
+
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

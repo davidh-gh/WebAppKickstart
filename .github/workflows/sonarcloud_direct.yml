@@ -65,16 +65,16 @@ jobs:
 
       - name: Get version
         id: package_version
-        uses: KageKirin/get-csproj-version@v1.0.0
+        uses: kzrnm/get-net-sdk-project-versions-action@v2
         with:
-          file: net9/KickstartApp/KickstartMvc/KickstartMvc.csproj # Specify your .csproj file path
-
+          proj-path: net9/KickstartApp/KickstartMvc/KickstartMvc.csproj
+        run: echo "::set-output name=assembly-version::${{ steps.package_version.outputs.assembly-version }}"
 
       - name: Extract Assembly Version
         id: get_version
         run: |
           ls -la
-          echo "${{ steps.package_version.version }}"
+          echo "${{ steps.get-package_version.outputs.assembly-version }}"
           dotnet msbuild net9/KickstartApp/KickstartApp.sln
           echo "cat"
           echo "csproj msbuild"

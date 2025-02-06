@@ -67,7 +67,9 @@ jobs:
         id: get_version
         run: |
           ls -la
+          sudo apt install radare2
           dotnet msbuild net9/KickstartApp/KickstartApp.sln
+          rabin2 -I net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.dll | grep version
           dotnet list net9/KickstartApp/KickstartMvc package
           strings net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.dll | grep -i "AssemblyVersion"
           VERSION=$(dotnet msbuild net9/KickstartApp/KickstartApp.sln -nologo -t:GetAssemblyVersion -p:TargetFramework=net9.0 -p:Configuration=Release -p:OutputPath=./output | grep 'AssemblyVersion' | sed 's/.*AssemblyVersion=//')

@@ -60,6 +60,9 @@ jobs:
       - name: List .NET Runtimes
         run: dotnet --list-runtimes
 
+      - name: Restore NuGet Packages
+        run: dotnet restore net9/KickstartApp/KickstartApp.sln
+        
       - name: Extract Assembly Version
         id: get_version
         run: |

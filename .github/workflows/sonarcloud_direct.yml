@@ -62,12 +62,13 @@ jobs:
 
       - name: Restore NuGet Packages
         run: dotnet restore net9/KickstartApp/KickstartApp.sln
-        
+
       - name: Extract Assembly Version
         id: get_version
         run: |
           ls -la
-          dotnet msbuild net9/KickstartApp/KickstartApp.sln 
+          dotnet msbuild net9/KickstartApp/KickstartApp.sln
+          strings net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.dll | findstr "AssemblyVersion"
           VERSION=$(dotnet msbuild net9/KickstartApp/KickstartApp.sln -nologo -t:GetAssemblyVersion -p:TargetFramework=net9.0 -p:Configuration=Release -p:OutputPath=./output | grep 'AssemblyVersion' | sed 's/.*AssemblyVersion=//')
           echo "VERSION=$VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT

@@ -68,7 +68,7 @@ jobs:
         uses: kzrnm/get-net-sdk-project-versions-action@v2
         with:
           proj-path: net9/KickstartApp/KickstartMvc/KickstartMvc.csproj
-        run: echo "::set-output name=assembly-version::${{ steps.package_version.outputs.assembly-version }}"
+        run: echo "::set-output name=assembly-version::${{steps.package_version.outputs.assembly-version}}"
 
       - name: Extract Assembly Version
         id: get_version

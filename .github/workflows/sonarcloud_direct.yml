@@ -66,6 +66,13 @@ jobs:
       - name: Display Project version
         run: echo "Project version is ${{ steps.project_version.outputs.assembly-version }}"
 
+      - name: Save Project version to github output
+        id: gh_project_version
+        run: echo "VERSION=${{ steps.project_version.outputs.assembly-version }}" >> $GITHUB_OUTPUT
+
+      - name: Display github project version
+        run: echo "Github project version is ${{ steps.gh_project_version.outputs.VERSION }}"
+
       - name: SonarScanner Begin
         run: dotnet sonarscanner begin /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /o:"armaita" /v:"${{ steps.project_version.outputs.assembly-version }}"
 

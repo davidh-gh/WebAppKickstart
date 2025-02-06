@@ -68,7 +68,8 @@ jobs:
         run: |
           ls -la
           dotnet msbuild net9/KickstartApp/KickstartApp.sln
-          dotnet --version net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.dll
+          dotnet net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/KickstartMvc.dll --version
+          cat net9/KickstartApp/KickstartMvc/bin/Debug/net9.0/Kickstart.deps.json | grep "version"
           VERSION=$(dotnet msbuild net9/KickstartApp/KickstartApp.sln -nologo -t:GetAssemblyVersion -p:TargetFramework=net9.0 -p:Configuration=Release -p:OutputPath=./output | grep 'AssemblyVersion' | sed 's/.*AssemblyVersion=//')
           echo "VERSION=$VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT

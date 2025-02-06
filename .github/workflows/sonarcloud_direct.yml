@@ -60,8 +60,12 @@ jobs:
       - name: List .NET Runtimes
         run: dotnet --list-runtimes
 
+      - name: Extract Assembly Version
+        id: get_version
+        run: echo "##[set-output name=VERSION;]$(dotnet msbuild -nologo -t:GetAssemblyVersion -p:TargetFramework=net9.0 -p:Configuration=Release -p:OutputPath=./output | grep 'AssemblyVersion' | sed 's/.*AssemblyVersion=//')"
+
       - name: SonarScanner Begin
-        run: dotnet sonarscanner begin /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /o:"armaita"
+        run: dotnet sonarscanner begin /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /o:"armaita" /v:"${{ steps.get_version.outputs.VERSION }}"
 
       - name: Build Solution
         run: dotnet build net9/KickstartApp/KickstartApp.sln

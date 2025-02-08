@@ -23,7 +23,7 @@ jobs:
         uses: JetBrains/qodana-action@v2024.3
         with:
           pr-mode: false
-          args: '--solution=net9/KickstartApp/KickstartApp.sln'
+          args: '--solution=WebKickStartApp.sln'
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1670587391 }}
           QODANA_ENDPOINT: 'https://qodana.cloud'

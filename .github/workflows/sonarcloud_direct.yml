@@ -55,13 +55,13 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
 
       - name: Restore NuGet Packages
-        run: dotnet restore net9/KickstartApp/KickstartApp.sln
+        run: dotnet restore
 
       - name: Get Project version
         id: project_version
         uses: kzrnm/get-net-sdk-project-versions-action@v2
         with:
-          proj-path: net9/KickstartApp/KickstartMvc/KickstartMvc.csproj
+          proj-path: src/KickStartWeb/KickStartWeb.csproj
 
       - name: Display Project version
         run: echo "Project version is ${{ steps.project_version.outputs.assembly-version }}"
@@ -77,10 +77,10 @@ jobs:
         run: dotnet sonarscanner begin /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /o:"armaita" /v:"${{ steps.project_version.outputs.assembly-version }}"
 
       - name: Build Solution
-        run: dotnet build net9/KickstartApp/KickstartApp.sln
+        run: dotnet build
 
       - name: Test
-        run: dotnet test net9/KickstartApp/KickstartApp.sln --no-build --verbosity normal
+        run: dotnet test --no-build --verbosity normal
 
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

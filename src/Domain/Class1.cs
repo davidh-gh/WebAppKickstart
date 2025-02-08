@@ -1,5 +1,5 @@
 ﻿namespace Domain;
 
-public class Class1
+public interface Class1
 {
 }

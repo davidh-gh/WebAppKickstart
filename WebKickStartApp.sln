@@ -1,14 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStartWeb", "src\KickStartWeb\KickStartWeb.csproj", "{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application\Application.csproj", "{313558FD-5319-444A-9312-F87B640B64E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{03F75D62-4D75-4583-8FD3-A65B9B8044F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{1F73D51E-A98A-4A08-BE21-0E1757969656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefaults", "src\ServiceDefaults\ServiceDefaults.csproj", "{C41BF4EF-F09D-4242-9FF2-F6C687877DB9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02785039-253C-4D53-8384-9D45EF4C8807}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.AppHost", "src\Aspire.AppHost\Aspire.AppHost.csproj", "{B4399FE9-95A0-4855-B2C1-2FC326208723}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspire.ServiceDefaults", "src\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj", "{BF627B15-D0A8-4CA9-9B68-D8F1AF337311}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +31,6 @@ Global
 		{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{313558FD-5319-444A-9312-F87B640B64E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{313558FD-5319-444A-9312-F87B640B64E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{313558FD-5319-444A-9312-F87B640B64E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{313558FD-5319-444A-9312-F87B640B64E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03F75D62-4D75-4583-8FD3-A65B9B8044F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03F75D62-4D75-4583-8FD3-A65B9B8044F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F75D62-4D75-4583-8FD3-A65B9B8044F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -32,9 +39,16 @@ Global
 		{1F73D51E-A98A-4A08-BE21-0E1757969656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F73D51E-A98A-4A08-BE21-0E1757969656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F73D51E-A98A-4A08-BE21-0E1757969656}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C41BF4EF-F09D-4242-9FF2-F6C687877DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C41BF4EF-F09D-4242-9FF2-F6C687877DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C41BF4EF-F09D-4242-9FF2-F6C687877DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C41BF4EF-F09D-4242-9FF2-F6C687877DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4399FE9-95A0-4855-B2C1-2FC326208723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4399FE9-95A0-4855-B2C1-2FC326208723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4399FE9-95A0-4855-B2C1-2FC326208723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4399FE9-95A0-4855-B2C1-2FC326208723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF627B15-D0A8-4CA9-9B68-D8F1AF337311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF627B15-D0A8-4CA9-9B68-D8F1AF337311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF627B15-D0A8-4CA9-9B68-D8F1AF337311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF627B15-D0A8-4CA9-9B68-D8F1AF337311}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

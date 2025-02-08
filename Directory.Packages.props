@@ -1,0 +1,23 @@
+﻿<Project>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<AspNetCoreVersion>9.0.1</AspNetCoreVersion>
+		<SystemExtensionVersion>9.0.0</SystemExtensionVersion>
+		<EntityFramworkCoreVersion>9.0.1</EntityFramworkCoreVersion>
+		<VSCodeGeneratorVersion>9.0.0</VSCodeGeneratorVersion>
+		<OpenTelemetryVersion>1.11.1</OpenTelemetryVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.1" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.1.0" />
+		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.0.0" />
+		<PackageVersion Include="OpenTelemetry" Version="$(OpenTelemetryVersion)" />
+		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)" />
+		<PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.11.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.11.0" />
+		<PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.11.0" />
+		<PackageVersion Include="SonarAnalyzer.CSharp" Version="10.6.0.109712" />
+	</ItemGroup>
+</Project>

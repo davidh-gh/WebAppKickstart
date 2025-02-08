@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickStartWeb", "src\KickStartWeb\KickStartWeb.csproj", "{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA77E865-5E5D-4F5B-B4A1-348EB48E509B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

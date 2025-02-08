@@ -6,10 +6,9 @@ namespace KickStartWeb.Controllers;
 
 public class HomeController(ILogger<HomeController> logger) : Controller
 {
-    private readonly ILogger<HomeController> _logger = logger;
-
     public IActionResult Index()
     {
+        LogIndexPageHello(logger, null);
         return View();
     }
 
@@ -23,4 +22,8 @@ public class HomeController(ILogger<HomeController> logger) : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    private static readonly Action<ILogger, Exception?> LogIndexPageHello =
+        LoggerMessage.Define(LogLevel.Information, new EventId(1, nameof(Index)), "Index page says hello");
+
 }

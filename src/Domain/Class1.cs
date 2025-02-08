@@ -1,5 +1,6 @@
 ﻿namespace Domain;
 
-public interface Class1
+public class Class1
 {
+    private bool IsTrue { get; init; } = true;
 }

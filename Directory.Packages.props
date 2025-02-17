@@ -9,8 +9,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.1" />
-		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.1.0" />
+		<PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.2" />
+		<PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.2.0" />
 		<PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.0.0" />
 		<PackageVersion Include="OpenTelemetry" Version="$(OpenTelemetryVersion)" />
 		<PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)" />

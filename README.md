@@ -11,6 +11,7 @@ Structure:
 * src/Api/Api.proj
 * test/UnitTests.proj
 * test/AcceptanceTests.proj
+* db/LocalDb.db
 
 Add as solution items:
 * .editorconfig - to keep code style consistent
@@ -24,6 +25,10 @@ Add as solution items:
 4. Add Qodana token to GitHub secrets
 5. Copy .github/workflows/ or .gitlab-ci.yml to your repository
 6. Test
+
+### Interesting
+1. Check Api/Code/LogEvents enum for defining LoggerMessage
+2. Check definition and setting EventId for LoggerMessage
 
 ToDo:
 * Serilog

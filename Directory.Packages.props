@@ -6,7 +6,7 @@
     <EntityFramworkCoreVersion>9.0.1</EntityFramworkCoreVersion>
     <VSCodeGeneratorVersion>9.0.0</VSCodeGeneratorVersion>
     <OpenTelemetryVersion>1.11.1</OpenTelemetryVersion>
-    <OpenTelemetryInstrumentationVersion>1.11.0</OpenTelemetryInstrumentationVersion>
+    <OpenTelemetryInstrumentationVersion>1.11.1</OpenTelemetryInstrumentationVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.0.0" />

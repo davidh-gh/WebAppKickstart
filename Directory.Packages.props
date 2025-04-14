@@ -21,6 +21,6 @@
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="$(OpenTelemetryInstrumentationVersion)" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="$(OpenTelemetryInstrumentationVersion)" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OpenTelemetryInstrumentationVersion)" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.6.0.109712" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.8.0.113526" />
   </ItemGroup>
 </Project>

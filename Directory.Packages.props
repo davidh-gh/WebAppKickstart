@@ -9,10 +9,10 @@
     <OpenTelemetryInstrumentationVersion>1.11.0</OpenTelemetryInstrumentationVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.2.1" />
     <PackageVersion Include="Microsoft.AspNetCore.OData" Version="9.2.0" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="9.2.0" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="9.0.0" />
     <PackageVersion Include="OpenTelemetry" Version="$(OpenTelemetryVersion)" />

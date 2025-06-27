@@ -1,4 +1,4 @@
-@KickStartApi_HostAddress = http://localhost:5281
+@KickStartApi_HostAddress = https://localhost:7224/
 
 GET {{KickStartApi_HostAddress}}/weatherforecast/
 Accept: application/json

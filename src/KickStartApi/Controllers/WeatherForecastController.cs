@@ -18,12 +18,11 @@ public class WeatherForecastController(ILogger<WeatherForecastController> logger
     public IEnumerable<WeatherForecast> Get()
     {
         LogWeatherForecastRequestDelegate(logger, RandomNumberGenerator.GetInt32(int.MaxValue), null);
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        return [.. Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = RandomNumberGenerator.GetInt32(-20, 55),
                 Summary = Summaries[RandomNumberGenerator.GetInt32(Summaries.Length)]
-            })
-            .ToArray();
+            })];
     }
 }

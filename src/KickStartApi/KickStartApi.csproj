@@ -3,4 +3,7 @@
         <PackageReference Include="Microsoft.AspNetCore.OData" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" />
+    </ItemGroup>
 </Project>

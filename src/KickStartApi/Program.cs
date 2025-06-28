@@ -1,5 +1,4 @@
 using Aspire.ServiceDefaults;
-using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 

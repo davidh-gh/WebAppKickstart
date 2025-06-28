@@ -7,5 +7,5 @@ public class UserDb : IdentityUser, IUniqueId
 {
     public new Guid Id { get; init; } = Guid.CreateVersion7();
 
-    public string? Name { get; init; }
+    public string? Name { get; set; }
 }

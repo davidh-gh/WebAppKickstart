@@ -1,13 +1,21 @@
+using Core.Info;
 using KickStartWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace KickStartWeb.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+public class HomeController(ILogger<HomeController> logger, IConfiguration config) : Controller
 {
     public IActionResult Index()
     {
+        // simple way of accessing configuration settings
+        ViewData["MySetting1"] = config["MySettings:Setting1"];
+        ViewData["MySetting2"] = config["MySettings:Setting2"];
+
+        // better way of accessing configuration settings
+        ViewData["MyApp"] = config.GetSection("MyAppSettings").Get<MyAppSettingsOptions>();
+
         LogIndexPageHello(logger, null);
         return View();
     }

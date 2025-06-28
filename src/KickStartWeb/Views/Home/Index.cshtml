@@ -1,8 +1,35 @@
-﻿@{
+﻿@using Core.Info
+
+@{
     ViewData["Title"] = "Home Page";
+    var myAppSettings = ViewData["MyApp"] as MyAppSettingsOptions;
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+</div>
+<div>
+    <h3>How to get App.Settings from hierarchy</h3>
+    <p>Check HomeController for Index method and check Core/Info/MyAppSettings <br/>
+        Environment can be changed in Properties/launchSettings.json<br/>
+        To use options, first register options for configuration<br/>
+        To use in command line, run: dotnet run MySettings:Setting1="Setting from command line"<br/>
+        A good option is also to load values from database. Create new list of KeyValuePairs of strings and load it with builder.AddInMemoryCollection (i.e. in Programs.cs)</p>
+    <p>
+        <h3>Simple retrieve</h3>
+        My settings 1: @ViewData["MySetting1"]
+        <br/>
+        My settings 2: @ViewData["MySetting2"]
+    </p>
+    <p>
+        <h3>Retrieve with Options</h3>
+        Settings 1: @myAppSettings?.Setting1
+        <br/>
+        Settings 2: @myAppSettings?.Setting2
+        <br/>
+        IsEnabled: @myAppSettings?.IsEnabled
+    </p>
 </div>

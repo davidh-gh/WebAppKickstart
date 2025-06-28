@@ -2,8 +2,10 @@
 	<PropertyGroup>
 	  <AssemblyVersion>0.1.0</AssemblyVersion>
 	  <FileVersion>0.1.0</FileVersion>
+	  <UserSecretsId>e3ba7038-e695-4731-9891-84562b546f0f</UserSecretsId>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" />
+		<ProjectReference Include="..\Core\Core.csproj" />
 	</ItemGroup>
 </Project>

@@ -4,6 +4,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
+var memCollection = new List<KeyValuePair<string, string?>>
+{
+    new("MySettings:Setting1", "Settings from memory collection"),
+    new("Aspire:ServiceDefaults:DefaultUICulture", "en-US"),
+    new("Aspire:ServiceDefaults:DefaultTimeZone", "UTC"),
+    new("Aspire:ServiceDefaults:DefaultDateFormat", "MM/dd/yyyy"),
+    new("Aspire:ServiceDefaults:DefaultTimeFormat", "HH:mm:ss")
+};
+builder.Configuration.AddInMemoryCollection(memCollection);
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

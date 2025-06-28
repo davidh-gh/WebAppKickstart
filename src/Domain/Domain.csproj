@@ -7,7 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Tables\" />
+      <Folder Include="Data\Migrations\" />
+      <Folder Include="Data\Queries\" />
     </ItemGroup>
 
 </Project>

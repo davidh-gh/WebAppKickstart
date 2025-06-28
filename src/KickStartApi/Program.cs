@@ -1,4 +1,7 @@
 using Aspire.ServiceDefaults;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,14 +15,41 @@ builder.Services.AddControllers();
 // Available at /openapi/v1.json
 builder.Services.AddOpenApi();
 
+builder.Services.AddAuthorization(options=>
+{
+    options.AddPolicy("MustHaveUserRole", policy =>
+    {
+        policy.RequireClaim("employeeId");
+        policy.RequireRole("User");
+    });
+    options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+});
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration.GetValue<string>("Authentication:Issuer"),
+            ValidAudience = builder.Configuration.GetValue<string>("Authentication:Audience"),
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(
+                    builder.Configuration.GetValue<string>("Authentication:SecretKey") ?? throw new ArgumentException("SecretKey is missing in configuration.")))
+        };
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     // to swap definition path from /openapi/v1.json to /v1/v1.json; but can leave it to default: /openapi/v1.json
-    app.MapOpenApi();
-    app.MapOpenApi("/{documentName}/v1.json");
+    app.MapOpenApi().AllowAnonymous();
+    app.MapOpenApi("/{documentName}/v1.json").AllowAnonymous();
 
     app.UseSwaggerUI(options =>
     {
@@ -29,6 +59,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

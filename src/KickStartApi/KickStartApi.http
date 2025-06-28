@@ -7,8 +7,20 @@ Accept: application/json
 
 ###
 
+POST {{KickStartApi_HostAddress}}/api/Authentication/token
+Accept: application/json
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "pass"
+}
+> {% client.global.set("auth_token", response.body.trim()); %}
+###
+
 GET {{KickStartApi_HostAddress}}/Sites
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 ###
 
@@ -64,5 +76,7 @@ Content-Type: application/json
 
 DELETE {{KickStartApi_HostAddress}}/api/Demos/3
 Accept: application/json
+
+
 
 ###

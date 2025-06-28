@@ -1,4 +1,6 @@
-﻿using KickStartApi.Code;
+﻿using Domain.Data.Tables;
+using KickStartApi.Code;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KickStartApi.Controllers;
@@ -15,10 +17,12 @@ public class SitesController(ILogger<WeatherForecastController> logger) : Contro
     [EndpointSummary("Get Site")]
     [EndpointDescription("Description of the Get Site endpoint.")]
     [Tags("Site")]
-    [HttpGet(Name = "GetSite")] // this should reflect /sites/GetSite
+    [HttpGet(Name = "GetSite")] // this should reflect /sites/GetSite, but it does not
+    [Authorize(Roles = "Admin,User")] // Use the Roles attribute to specify required roles
+    [Authorize(Policy = "MustHaveUserRole")] // Use the Policy attribute to specify a policy
     public IResult Index()
     {
         LogGetSite(logger, null);
-        return Results.Ok();
+        return Results.Ok(new UserDb());
     }
 }

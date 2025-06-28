@@ -14,3 +14,55 @@ Accept: application/json
 
 GET {{KickStartApi_HostAddress}}/Sites/GetSite
 Accept: application/json
+
+###
+
+GET {{KickStartApi_HostAddress}}/api/Demos
+Accept: application/json
+
+###
+
+GET {{KickStartApi_HostAddress}}/api/Demos/3
+Accept: application/json
+
+###
+
+POST {{KickStartApi_HostAddress}}/api/Demos
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Demo 1",
+  "description": "This is a demo",
+  "isActive": true
+}
+
+###
+
+PUT {{KickStartApi_HostAddress}}/api/Demos/3
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Demo 1 Updated",
+  "description": "This is a demo updated"
+}
+
+###
+
+PATCH {{KickStartApi_HostAddress}}/api/Demos/3
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": 3,
+  "description": "This is a patched demo"
+}
+
+###
+
+DELETE {{KickStartApi_HostAddress}}/api/Demos/3
+Accept: application/json
+
+###

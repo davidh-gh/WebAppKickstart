@@ -6,7 +6,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace KickStartApi.Controllers;
 
@@ -17,7 +16,7 @@ public class AuthenticationController(IConfiguration config) : ControllerBase
     // api/authentication/token
     [HttpPost("token")]
     [AllowAnonymous]
-    public ActionResult<string> Authenticate([FromBody] AuthenticateIn? data)
+    public ActionResult<AuthenticateOut> Authenticate([FromBody] AuthenticateIn? data)
     {
         // This is a placeholder for authentication logic.
         // In a real application, you would validate the credentials and return a token or user information.
@@ -38,7 +37,7 @@ public class AuthenticationController(IConfiguration config) : ControllerBase
         return Ok(token);
     }
 
-    private static AuthenticateOut? ValidateCredentials(AuthenticateIn data)
+    private static AuthenticateUserData? ValidateCredentials(AuthenticateIn data)
     {
         // Placeholder for credential validation logic
         // In a real application, you would check the username and password against a database or identity provider.
@@ -50,19 +49,19 @@ public class AuthenticationController(IConfiguration config) : ControllerBase
         if (data.Username.Equals("user", StringComparison.Ordinal)
             && data.Password.Equals("pass", StringComparison.Ordinal))
         {
-            return new AuthenticateOut(1, data.Username);
+            return new AuthenticateUserData(1, data.Username);
         }
 
         if (data.Username.Equals("aaaa", StringComparison.Ordinal)
             && data.Password.Equals("1234", StringComparison.Ordinal))
         {
-            return new AuthenticateOut(2, data.Username);
+            return new AuthenticateUserData(2, data.Username);
         }
 
         return null;
     }
 
-    private string GenerateToken(AuthenticateOut user)
+    private AuthenticateOut GenerateToken(AuthenticateUserData user)
     {
         var secretKey = new SymmetricSecurityKey(
             Encoding.ASCII.GetBytes(
@@ -74,17 +73,21 @@ public class AuthenticationController(IConfiguration config) : ControllerBase
         [
             new(JwtRegisteredClaimNames.Sub, user.UserId.ToString(CultureInfo.InvariantCulture)),
             new(JwtRegisteredClaimNames.UniqueName, user.UserName),
-            new ( JwtRegisteredClaimNames.Typ, "user")
+            new ( JwtRegisteredClaimNames.Typ, "user"),
+            new(JwtRegisteredClaimNames.Jti, Guid.CreateVersion7().ToString()),
+            new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture))
         ];
 
-        var token = new JwtSecurityToken(
+        var securityToken = new JwtSecurityToken(
             config.GetValue<string>("Authentication:Issuer"),
             config.GetValue<string>("Authentication:Audience"),
             claims,
             DateTime.UtcNow, // When this token becomes valid
-            DateTime.UtcNow.AddMinutes(1), // When the token will expire
+            DateTime.UtcNow.AddMinutes(50), // When the token will expire
             signingCredentials);
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
+
+        return new AuthenticateOut(token);
     }
 }

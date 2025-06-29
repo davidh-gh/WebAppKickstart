@@ -1,13 +1,11 @@
 ﻿using Domain.Data.Tables;
 using KickStartApi.Code;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KickStartApi.Controllers;
 
-// Use Plural naming for controller names, e.g., SitesController
-[ApiController]
 [Route("[controller]")]
+[ApiController]
 public class SitesController(ILogger<WeatherForecastController> logger) : ControllerBase
 {
     private static readonly Action<ILogger, Exception?> LogGetSite =
@@ -18,11 +16,13 @@ public class SitesController(ILogger<WeatherForecastController> logger) : Contro
     [EndpointDescription("Description of the Get Site endpoint.")]
     [Tags("Site")]
     [HttpGet(Name = "GetSite")] // this should reflect /sites/GetSite, but it does not
-    [Authorize(Roles = "Admin,User")] // Use the Roles attribute to specify required roles
-    [Authorize(Policy = "MustHaveUserRole")] // Use the Policy attribute to specify a policy
-    public IResult Index()
+    // [Authorize(Roles = "Admin,User")] // Use the Roles attribute to specify required roles
+    // [Authorize(Policy = "MustHaveUserRole")] // Use the Policy attribute to specify a policy
+    [ProducesResponseType<UserDb>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult Index()
     {
         LogGetSite(logger, null);
-        return Results.Ok(new UserDb());
+        return Ok(new UserDb());
     }
 }

@@ -1,6 +1,7 @@
 
 ###
-@KickStartApi_HostAddress = https://localhost:7224/
+
+@KickStartApi_HostAddress = https://localhost:7224
 
 GET {{KickStartApi_HostAddress}}/weatherforecast/
 Accept: application/json
@@ -15,7 +16,8 @@ Content-Type: application/json
   "username": "user",
   "password": "pass"
 }
-> {% client.global.set("auth_token", response.body.trim()); %}
+> {% client.global.set("auth_token", response.body.token); %}
+
 ###
 
 GET {{KickStartApi_HostAddress}}/Sites
@@ -26,22 +28,26 @@ Authorization: Bearer {{auth_token}}
 
 GET {{KickStartApi_HostAddress}}/Sites/GetSite
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 ###
 
 GET {{KickStartApi_HostAddress}}/api/Demos
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 ###
 
-GET {{KickStartApi_HostAddress}}/api/Demos/3
+GET {{KickStartApi_HostAddress}}/api/Demos/Id/3
 Accept: application/json
+Authorization: Bearer {{auth_token}}
 
 ###
 
 POST {{KickStartApi_HostAddress}}/api/Demos
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "name": "Demo 1",
@@ -54,6 +60,7 @@ Content-Type: application/json
 PUT {{KickStartApi_HostAddress}}/api/Demos/3
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 3,
@@ -66,6 +73,7 @@ Content-Type: application/json
 PATCH {{KickStartApi_HostAddress}}/api/Demos/3
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer {{auth_token}}
 
 {
   "id": 3,
@@ -76,7 +84,6 @@ Content-Type: application/json
 
 DELETE {{KickStartApi_HostAddress}}/api/Demos/3
 Accept: application/json
-
-
+Authorization: Bearer {{auth_token}}
 
 ###

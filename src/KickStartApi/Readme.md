@@ -1,4 +1,9 @@
-# How to setup API
+# How to set up API
+
+**Note:** 
+Use Plural naming for controller names, e.g., *SitesController, UsersController*, etc.
+
+Do not use package *Microsoft.IdentityModel.Tokens*
 
 ## To have open API documentation, add the following to your `Program.cs`:
 
@@ -9,7 +14,7 @@ app.MapOpenApi("{documentName}/v1.json");
 ```
 
 ## To have OpenAPI UI:
-* add Microsoft.Extensions.ApiDescription.Server package
+* add *Microsoft.Extensions.ApiDescription.Server* package
 * to project file add:
 ```xml
 <PropertyGroup>
@@ -17,7 +22,7 @@ app.MapOpenApi("{documentName}/v1.json");
     <OpenApiGenerateDocumentsOptions>--file-name open-api</OpenApiGenerateDocumentsOptions>
 </PropertyGroup>
 ```
-* add Swashbuckle.AspNetCore.SwaggerUi package
+* add *Swashbuckle.AspNetCore.SwaggerUI* package
 * and configure Swagger UI in `Program.cs`:
 ```csharp
 app.UseSwaggerUI(options =>
@@ -55,7 +60,7 @@ app.UseAuthorization();
 
 ## To add authorization
 
-Dont forget to add app.MapOpenApi().AllowAnonymous();
+Dont forget to add *app.MapOpenApi().AllowAnonymous()*
 
 ```csharp
 builder.Services.AddAuthorization(options=>

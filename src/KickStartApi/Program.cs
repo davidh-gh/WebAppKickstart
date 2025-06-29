@@ -1,4 +1,5 @@
 using Aspire.ServiceDefaults;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -25,21 +26,28 @@ builder.Services.AddAuthorization(options=>
     options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 });
 
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
     {
+        options.Authority = builder.Configuration.GetValue<string>("Authentication:Authority");
+        options.Audience = builder.Configuration.GetValue<string>("Authentication:Audience");
+        options.IncludeErrorDetails = true;
+        options.SaveToken = true;
         options.TokenValidationParameters = new()
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
+            ValidateIssuerSigningKey = false,
             ValidIssuer = builder.Configuration.GetValue<string>("Authentication:Issuer"),
             ValidAudience = builder.Configuration.GetValue<string>("Authentication:Audience"),
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.ASCII.GetBytes(
                     builder.Configuration.GetValue<string>("Authentication:SecretKey") ?? throw new ArgumentException("SecretKey is missing in configuration.")))
         };
+
+        options.MapInboundClaims = true;
+        options.Validate(JwtBearerDefaults.AuthenticationScheme);
     });
 
 var app = builder.Build();
@@ -49,13 +57,6 @@ if (app.Environment.IsDevelopment())
 {
     // to swap definition path from /openapi/v1.json to /v1/v1.json; but can leave it to default: /openapi/v1.json
     app.MapOpenApi().AllowAnonymous();
-    app.MapOpenApi("/{documentName}/v1.json").AllowAnonymous();
-
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/openapi/v1.json", "KickStart API V1");
-        options.SwaggerEndpoint("/v1/v1.json", "KickStart API V2");
-    });
 }
 
 app.UseHttpsRedirection();

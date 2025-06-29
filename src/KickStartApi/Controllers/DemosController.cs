@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KickStartApi.Controllers;
 
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class DemosController : ControllerBase
 {
     // GET - retrieve record or list of records
@@ -19,9 +19,9 @@ public class DemosController : ControllerBase
         return ["value1", "value2"];
     }
 
-    // GET api/<Demos>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
+    // GET api/<Demos>/id/5
+    [HttpGet("id/{id}")]
+    public string GetById(int id)
     {
         return "value";
     }

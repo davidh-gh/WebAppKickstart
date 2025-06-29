@@ -8,8 +8,8 @@
         <PackageReference Include="Microsoft.AspNetCore.OData" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
         <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" />
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
     </ItemGroup>
     <ItemGroup>

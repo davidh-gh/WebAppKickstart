@@ -1,5 +1,6 @@
 using KickStartApi.Code;
 using KickStartApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 
@@ -7,6 +8,7 @@ namespace KickStartApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[AllowAnonymous]
 public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase
 {
     private static readonly string[] Summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];

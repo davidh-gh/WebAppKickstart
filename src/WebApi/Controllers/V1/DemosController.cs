@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Cryptography;
 using WebApi.Code.Monitor;
 
 namespace WebApi.Controllers.V1;
@@ -15,14 +17,26 @@ public class DemosController(ILogger<DemosController> logger) : ControllerBase
 
     // GET: api/<Demos>
     [HttpGet]
+    [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)]
+    [EnableRateLimiting("fixedPolicy")]
     public IEnumerable<string> Get()
     {
         LogMessages.LogDemosGet(logger, null);
-        return ["value1", "value2"];
+
+        var nbr = RandomNumberGenerator.GetInt32(1, 10);
+
+        var values = new List<string>();
+        for (int i = 0; i < nbr; i++)
+        {
+            values.Add($"value {i + 1}");
+        }
+
+        return values;
     }
 
     // GET api/<Demos>/id/5
     [HttpGet("id/{id}")]
+    [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)] // this applies to unique ids
     public IActionResult GetById(int id)
     {
         if(id is < 0 or > 100)
@@ -32,7 +46,10 @@ public class DemosController(ILogger<DemosController> logger) : ControllerBase
         }
 
         LogMessages.LogDemosGetById(logger, id, null);
-        return Ok($"Value {id}");
+
+        var nbr = RandomNumberGenerator.GetInt32(1, 100);
+
+        return Ok($"Value[{nbr}]: {id}");
     }
 
     // POST api/<Demos>

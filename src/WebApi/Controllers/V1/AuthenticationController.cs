@@ -20,18 +20,18 @@ public class AuthenticationController(IConfiguration config, ILogger<Authenticat
     // api/authentication/token
     [HttpPost("token")]
     [AllowAnonymous]
-    public ActionResult<AuthenticateOut> Authenticate([FromBody] AuthenticateIn? data)
+    public ActionResult<AuthenticateResponse> Authenticate([FromBody] AuthenticateRequest data)
     {
         // This is a placeholder for authentication logic.
         // In a real application, you would validate the credentials and return a token or user information.
 
         LogMessages.LogAuthenticationRequest(logger, data?.Username ?? "NA", null);
 
-        if (data == null)
+        if (!ModelState.IsValid)
         {
             return BadRequest("Invalid authentication request.");
         }
-        var user = ValidateCredentials(data);
+        var user = ValidateCredentials(data!);
 
         if (user == null)
         {
@@ -43,7 +43,7 @@ public class AuthenticationController(IConfiguration config, ILogger<Authenticat
         return Ok(token);
     }
 
-    private static AuthenticateUserData? ValidateCredentials(AuthenticateIn data)
+    private static AuthenticateUserData? ValidateCredentials(AuthenticateRequest data)
     {
         // Placeholder for credential validation logic
         // In a real application, you would check the username and password against a database or identity provider.
@@ -67,7 +67,7 @@ public class AuthenticationController(IConfiguration config, ILogger<Authenticat
         return null;
     }
 
-    private AuthenticateOut GenerateToken(AuthenticateUserData user)
+    private AuthenticateResponse GenerateToken(AuthenticateUserData user)
     {
         var secretKey = new SymmetricSecurityKey(
             Encoding.ASCII.GetBytes(
@@ -94,6 +94,6 @@ public class AuthenticationController(IConfiguration config, ILogger<Authenticat
 
         var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
-        return new AuthenticateOut(token);
+        return new AuthenticateResponse(token);
     }
 }

@@ -1,13 +1,13 @@
-using KickStartApi.Models.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
+using WebApi.Models.Authentication;
 
-namespace KickStartApi.Controllers;
+namespace WebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

@@ -1,20 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+
     <PropertyGroup>
-      <Version>1.0.1</Version>
-      <UserSecretsId>dc1350c7-8098-4267-937c-121cf033692d</UserSecretsId>
+        <Version>1.0.1</Version>
+        <UserSecretsId>dc1350c7-8098-4267-937c-121cf033692d</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
-        <PackageReference Include="Microsoft.AspNetCore.OData" />
+<!--        <PackageReference Include="Microsoft.AspNetCore.OData" />-->
         <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
         <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" />
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />
+<!--        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />-->
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" />
-      <ProjectReference Include="..\Core\Core.csproj" />
-      <ProjectReference Include="..\Domain\Domain.csproj" />
+        <ProjectReference Include="..\Aspire.ServiceDefaults\Aspire.ServiceDefaults.csproj" />
+        <ProjectReference Include="..\Core\Core.csproj" />
+        <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
+
 </Project>

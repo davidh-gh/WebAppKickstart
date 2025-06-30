@@ -1,4 +1,4 @@
-﻿namespace KickStartApi.Code
+﻿namespace WebApi.Code
 {
     public enum LogEvents
     {

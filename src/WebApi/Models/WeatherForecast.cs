@@ -1,4 +1,4 @@
-namespace KickStartApi.Models;
+namespace WebApi.Models;
 
 public class WeatherForecast
 {

@@ -1,10 +1,10 @@
-using KickStartApi.Code;
-using KickStartApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
+using WebApi.Code;
+using WebApi.Models;
 
-namespace KickStartApi.Controllers;
+namespace WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

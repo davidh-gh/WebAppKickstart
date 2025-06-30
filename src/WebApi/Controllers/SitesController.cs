@@ -1,8 +1,8 @@
 ﻿using Domain.Data.Tables;
-using KickStartApi.Code;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Code;
 
-namespace KickStartApi.Controllers;
+namespace WebApi.Controllers;
 
 [Route("[controller]")]
 [ApiController]

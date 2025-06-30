@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApi.Controllers;
+namespace WebApi.Controllers.V1;
 
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
 public class DemosController : ControllerBase
 {

@@ -2,12 +2,12 @@
 
 ###
 
-GET {{WebApi_HostAddress}}/weatherforecast/
+GET {{WebApi_HostAddress}}/v1/weatherforecast/
 Accept: application/json
 
 ###
 
-POST {{WebApi_HostAddress}}/api/Authentication/token
+POST {{WebApi_HostAddress}}/api/v1/Authentication/token
 Accept: application/json
 Content-Type: application/json
 
@@ -19,31 +19,37 @@ Content-Type: application/json
 
 ###
 
-GET {{WebApi_HostAddress}}/Sites
+GET {{WebApi_HostAddress}}/api/v1/Sites
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 
 ###
 
-GET {{WebApi_HostAddress}}/Sites/GetSite
+GET {{WebApi_HostAddress}}/api/v2/Sites
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 
 ###
 
-GET {{WebApi_HostAddress}}/api/Demos
+GET {{WebApi_HostAddress}}/api/v1/Sites/GetSite
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 
 ###
 
-GET {{WebApi_HostAddress}}/api/Demos/Id/3
+GET {{WebApi_HostAddress}}/api/v1/Demos
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 
 ###
 
-POST {{WebApi_HostAddress}}/api/Demos
+GET {{WebApi_HostAddress}}/api/v1/Demos/Id/3
+Accept: application/json
+Authorization: Bearer {{auth_token}}
+
+###
+
+POST {{WebApi_HostAddress}}/api/v1/Demos
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -56,7 +62,7 @@ Authorization: Bearer {{auth_token}}
 
 ###
 
-PUT {{WebApi_HostAddress}}/api/Demos/3
+PUT {{WebApi_HostAddress}}/api/v1/Demos/3
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -69,7 +75,7 @@ Authorization: Bearer {{auth_token}}
 
 ###
 
-PATCH {{WebApi_HostAddress}}/api/Demos/3
+PATCH {{WebApi_HostAddress}}/api/v1/Demos/3
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -81,7 +87,7 @@ Authorization: Bearer {{auth_token}}
 
 ###
 
-DELETE {{WebApi_HostAddress}}/api/Demos/3
+DELETE {{WebApi_HostAddress}}/api/v1/Demos/3
 Accept: application/json
 Authorization: Bearer {{auth_token}}
 

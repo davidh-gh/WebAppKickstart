@@ -4,10 +4,10 @@ using System.Security.Cryptography;
 using WebApi.Code;
 using WebApi.Models;
 
-namespace WebApi.Controllers;
+namespace WebApi.Controllers.V1;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 [AllowAnonymous]
 public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase
 {

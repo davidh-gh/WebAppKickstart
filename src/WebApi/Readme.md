@@ -89,3 +89,36 @@ builder.Services.AddAuthorization(options=>
 [Authorize] // Use this attribute to require authentication
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] // Use this attribute to specify the authentication scheme
 ```
+
+# API Versioning
+To add API versioning, you can use the `Asp.Versioning.Mvc` and `Asp.Versioning.Mvc.ApiExplorer` package (second is for swagger to work). Here’s 
+how to set it up:
+```csharp
+builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions = true; // Include API version in response headers
+    options.AssumeDefaultVersionWhenUnspecified = true; // Use default version if not specified
+    options.DefaultApiVersion = new ApiVersion(1, 0); // Set default API version
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV"; // Format for versioned API groups
+    options.SubstituteApiVersionInUrl = true; // Substitute API version in URL
+});
+
+// this works as API, but not for Swagger
+```
+
+Then, you can specify the API version in your controllers:
+
+It is recommended to put controller in a version folder, e.g., `Controllers/V1/UsersController.cs` and use the following code in your controller:
+
+```csharp
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiController]
+public class UsersController : ControllerBase
+{
+    // Your actions here
+}
+``` 
+This will allow you to version your API endpoints and provide a clear structure for versioning.

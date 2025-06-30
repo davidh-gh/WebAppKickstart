@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -7,10 +8,12 @@ using System.Security.Claims;
 using System.Text;
 using WebApi.Models.Authentication;
 
-namespace WebApi.Controllers;
+namespace WebApi.Controllers.V1;
 
 [ApiController]
-[Route("api/[controller]")]
+[ApiVersion("1.0")]
+[ApiVersion("2.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class AuthenticationController(IConfiguration config) : ControllerBase
 {
     // api/authentication/token

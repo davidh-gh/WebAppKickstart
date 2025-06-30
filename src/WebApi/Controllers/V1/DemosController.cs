@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using WebApi.Code.Monitor;
 
@@ -23,12 +24,14 @@ public class DemosController(ILogger<DemosController> logger) : ControllerBase
     {
         LogMessages.LogDemosGet(logger, null);
 
+        var userId = User.Claims.FirstOrDefault(c=> c.Type == ClaimTypes.NameIdentifier)?.Value; // Get the user ID from the claims, which is saved as JwtRegisteredClaimNames.Sub
+
         var nbr = RandomNumberGenerator.GetInt32(1, 10);
 
         var values = new List<string>();
         for (int i = 0; i < nbr; i++)
         {
-            values.Add($"value {i + 1}");
+            values.Add($"value {i + 1} for user {userId}");
         }
 
         return values;

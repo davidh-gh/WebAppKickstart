@@ -5,6 +5,10 @@ Use Plural naming for controller names, e.g., *SitesController, UsersController*
 
 Do not use package *Microsoft.IdentityModel.Tokens*
 Use IActionResult instead of void or primitive types in controller methods.
+For explicit return types, use `ActionResult<T>` where T is the type of the response model.
+
+Handle exceptions globally using `UseExceptionHandler` middleware in `Program.cs` to catch unhandled exceptions and return a proper error response.
+Handle exceptions in controllers only (not below) using try-catch blocks and return appropriate error responses.
 
 ## To have open API documentation, add the following to your `Program.cs`:
 
@@ -56,6 +60,9 @@ builder.Services.AddAuthentication("Bearer")
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+// then in controllers you can access user information via User property
+var userId = User.Claims.FirstOrDefault(c=> c.Type == ClaimTypes.NameIdentifier)?.Value; // Get the user ID from the claims, which is saved as JwtRegisteredClaimNames.Sub
 
 ```
 

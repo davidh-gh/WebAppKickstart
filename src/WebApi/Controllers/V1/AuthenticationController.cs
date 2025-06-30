@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WebApi.Code.Monitor;
 using WebApi.Models.Authentication;
 
 namespace WebApi.Controllers.V1;
@@ -14,7 +15,7 @@ namespace WebApi.Controllers.V1;
 [ApiVersion("1.0")]
 [ApiVersion("2.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class AuthenticationController(IConfiguration config) : ControllerBase
+public class AuthenticationController(IConfiguration config, ILogger<AuthenticationController> logger) : ControllerBase
 {
     // api/authentication/token
     [HttpPost("token")]
@@ -23,6 +24,8 @@ public class AuthenticationController(IConfiguration config) : ControllerBase
     {
         // This is a placeholder for authentication logic.
         // In a real application, you would validate the credentials and return a token or user information.
+
+        LogMessages.LogAuthenticationRequest(logger, data?.Username ?? "NA", null);
 
         if (data == null)
         {

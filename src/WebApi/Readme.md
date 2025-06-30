@@ -4,6 +4,7 @@
 Use Plural naming for controller names, e.g., *SitesController, UsersController*, etc.
 
 Do not use package *Microsoft.IdentityModel.Tokens*
+Use IActionResult instead of void or primitive types in controller methods.
 
 ## To have open API documentation, add the following to your `Program.cs`:
 
@@ -122,3 +123,36 @@ public class UsersController : ControllerBase
 }
 ``` 
 This will allow you to version your API endpoints and provide a clear structure for versioning.
+
+# Monitoring
+
+Log events are defined in `Api/Code/LogEvents.cs` and can be used with `ILogger` to log events with specific IDs.
+You can use the `LogEvent` enum to define your log events and use them in your controllers or services. For example:
+
+```csharp
+_logger.LogInformation(LogEvent.UserCreated, "User {UserId} created", userId);
+```
+And use LoggerMessage delegates to log events with specific IDs:
+
+```csharp
+// Check LogMessages
+public static readonly Action<ILogger, string, Exception?> LogAuthenticationRequest =
+            LoggerMessage.Define<string>(LogLevel.Debug, new EventId((int)LogEvents.AuthenticationToken, "GetAuthentication"),
+                "Get token for {UserName}");
+```
+
+# Health Checks
+To add health checks, you can use the `Microsoft.AspNetCore.Diagnostics.HealthChecks` package. Here’s how to set it up:
+```csharp
+builder.Services.AddHealthChecks()
+    .AddCheck("self", () => HealthCheckResult.Healthy("The service is healthy"))
+    .AddSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), name: "Database");
+// Add other health checks as needed
+app.UseHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+```
+This will add a health check endpoint at `/health` that returns the health status of your application and its dependencies.
+
+# OpenTelemetry

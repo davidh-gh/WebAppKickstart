@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Code.Monitor;
 
 namespace WebApi.Controllers.V1;
 
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class DemosController : ControllerBase
+public class DemosController(ILogger<DemosController> logger) : ControllerBase
 {
     // GET - retrieve record or list of records
     // POST - create record
@@ -16,41 +17,49 @@ public class DemosController : ControllerBase
     [HttpGet]
     public IEnumerable<string> Get()
     {
+        LogMessages.LogDemosGet(logger, null);
         return ["value1", "value2"];
     }
 
     // GET api/<Demos>/id/5
     [HttpGet("id/{id}")]
-    public string GetById(int id)
+    public IActionResult GetById(int id)
     {
-        return "value";
+        if(id is < 0 or > 100)
+        {
+            LogMessages.LogDemosGetByIdInvalidId(logger, id, null);
+            return BadRequest("Id must be between 0 and 100");
+        }
+
+        LogMessages.LogDemosGetById(logger, id, null);
+        return Ok($"Value {id}");
     }
 
     // POST api/<Demos>
     [HttpPost]
-    public void Post([FromBody] string value)
+    public IActionResult Post([FromBody] string value)
     {
-        // ignored
+        return Ok($"Value {value}");
     }
 
     // PUT api/<Demos>/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public IActionResult Put(int id, [FromBody] string value)
     {
-        // ignored
+        return Ok($"Value {value}");
     }
 
     // PATCH api/<Demos>/5
     [HttpPatch("{id}")]
-    public void Patch(int id, [FromBody] string value)
+    public IActionResult Patch(int id, [FromBody] string value)
     {
-        // ignored
+        return Ok($"Value {value}");
     }
 
     // DELETE api/<Demos>/5
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public IActionResult Delete(int id)
     {
-        // ignored
+        return Ok($"Value {id}");
     }
 }

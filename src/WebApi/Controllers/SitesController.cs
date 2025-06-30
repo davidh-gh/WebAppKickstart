@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Code;
+using WebApi.Code.Monitor;
 using WebApi.Controllers.V1;
 
 namespace WebApi.Controllers;

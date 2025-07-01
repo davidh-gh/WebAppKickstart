@@ -14,8 +14,18 @@ var memCollection = new List<KeyValuePair<string, string?>>
 };
 builder.Configuration.AddInMemoryCollection(memCollection);
 
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient("api", options=>
+{
+    var baseUrl = builder.Configuration["Api:BaseUrl"];
+    options.BaseAddress = new Uri(baseUrl!);
+    options.DefaultRequestHeaders.Add("Accept", "application/json");
+});
 
 var app = builder.Build();
 
@@ -31,6 +41,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

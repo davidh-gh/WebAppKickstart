@@ -191,8 +191,9 @@ app.MapHealthChecks("/health-diag", new HealthCheckOptions
 app.MapHealthChecksUI();
 ```
 
-The result is available at `/health`.
-The UI is available at `/healthchecks-ui` and provides a nice dashboard to monitor the health of your application and its dependencies.
+The result summary is available at `/health`.
+The result details is available at `/health-diag`.
+The UI is available at `/healthchecks-ui` and provides a nice dashboard to monitor the health of your application and its dependencies. UI could be a separate project, e.g., `WebApi.HealthChecksUI`.
 
 # OpenTelemetry
 

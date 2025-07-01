@@ -2,6 +2,10 @@
 {
     public static class LogMessages
     {
+        // HealthCheckController
+        public static readonly Action<ILogger, Exception?> LogHealthPing =
+            LoggerMessage.Define(LogLevel.Information, new EventId((int)LogEvents.HealthPing, "Ping"), "Pinging the health endpoint");
+
         // AuthenticationController
         public static readonly Action<ILogger, string, Exception?> LogAuthenticationRequest =
             LoggerMessage.Define<string>(LogLevel.Debug, new EventId((int)LogEvents.AuthenticationToken, "GetAuthentication"),

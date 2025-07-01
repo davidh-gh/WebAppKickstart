@@ -3,6 +3,7 @@
     public enum LogEvents
     {
         None = 0,
+        HealthPing = 1,
         AuthenticationToken = 10,
         DemosGetById = 100,
         DemosGet = 101,

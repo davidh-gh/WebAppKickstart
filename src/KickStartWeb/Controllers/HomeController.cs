@@ -61,7 +61,7 @@ public class HomeController(ILogger<HomeController> logger, IConfiguration confi
                 return View(model);
             }
 
-            var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+            var result = await response.Content.ReadFromJsonAsync<LoginResponse>().ConfigureAwait(false);
             if (result is null || string.IsNullOrWhiteSpace(result.Token))
             {
                 ModelState.AddModelError(string.Empty, "Login failed. No token returned.");

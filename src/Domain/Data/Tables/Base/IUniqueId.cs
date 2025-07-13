@@ -1,7 +1,6 @@
-﻿namespace Domain.Data.Tables.Base
+﻿namespace Domain.Data.Tables.Base;
+
+public interface IUniqueId
 {
-    public interface IUniqueId
-    {
-        public Guid Id { get; }
-    }
+    public Guid Id { get; }
 }

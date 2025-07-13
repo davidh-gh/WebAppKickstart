@@ -1,7 +1,6 @@
-﻿namespace Domain.Data.Tables.Base
+﻿namespace Domain.Data.Tables.Base;
+
+public class UniqueId : IUniqueId
 {
-    public class UniqueId : IUniqueId
-    {
-        public Guid Id { get; init; } = Guid.CreateVersion7();
-    }
+    public Guid Id { get; init; } = Guid.CreateVersion7();
 }

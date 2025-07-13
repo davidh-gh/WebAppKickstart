@@ -1,7 +1,6 @@
-﻿namespace Domain.Data.Tables.Base
+﻿namespace Domain.Data.Tables.Base;
+
+public interface ILongId
 {
-    public interface ILongId
-    {
-        public long Id { get; set; }
-    }
+    public long Id { get; set; }
 }

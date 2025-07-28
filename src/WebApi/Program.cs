@@ -1,6 +1,6 @@
 using Asp.Versioning;
 using Aspire.ServiceDefaults;
-using HealthChecks.UI.Client;
+using Core.Utils.HealthCheck;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Net;
@@ -32,13 +32,6 @@ builder.Services.AddApiVersioning(options =>
 builder.Services.AddHealthChecks()
     .AddCheck<RandomHealthCheck>("Site Health Check")
     .AddCheck<RandomHealthCheck>("Database Health Check");
-
-builder.Services.AddHealthChecksUI(opts =>
-{
-    opts.AddHealthCheckEndpoint("api", "/health-diag");
-    opts.SetEvaluationTimeInSeconds(60); // this should be less than the minimum seconds between failure notifications and at least 60 seconds
-    opts.SetMinimumSecondsBetweenFailureNotifications(60*5); // this should be greater than the evaluation time (like 5x evaluation time)
-}).AddInMemoryStorage();
 
 builder.Services.AddResponseCaching(options =>
 {
@@ -104,7 +97,6 @@ app.MapHealthChecks("/health-diag", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
-app.MapHealthChecksUI();
 
 app.MapControllers();
 

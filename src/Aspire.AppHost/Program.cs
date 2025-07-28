@@ -1,11 +1,12 @@
 using Microsoft.Extensions.Configuration;
+using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var webapi = builder.AddProject<Projects.WebApi>("webapi")
+var webapi = builder.AddProject<WebApi>("webapi")
     .WithUrl("swagger", "Swagger");
 
-builder.AddProject<Projects.KickStartWeb>("kickstartweb")
+builder.AddProject<KickStartWeb>("kickstartweb")
     .WithReference(webapi);
 
 var webApiUrl = webapi.GetEndpoint("https");
@@ -15,5 +16,9 @@ builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
 {
     ["Api:BaseUrl"] = webApiUrl.ToString()
 });
+
+builder.AddProject<HealthUIWeb>("healthuiweb")
+    .WithUrl("health", "Health")
+    .WithUrl("health-diag", "HealthDiag");
 
 await builder.Build().RunAsync();

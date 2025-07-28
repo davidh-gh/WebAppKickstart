@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using HealthUIWeb.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HealthUIWeb.Controllers;
 
@@ -13,8 +14,10 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    [SuppressMessage("Performance", "CA1848:Use the LoggerMessage delegates")]
     public IActionResult Index()
     {
+        _logger.LogInformation("Index");
         return View();
     }
 

@@ -46,3 +46,5 @@ coverage.xml
 # dotCover output
 dotCover.Output.*
 /dotCover.Output
+
+DhKey.snk

@@ -19,6 +19,7 @@ builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
 
 builder.AddProject<HealthUIWeb>("healthuiweb")
     .WithUrl("health", "Health")
-    .WithUrl("health-diag", "HealthDiag");
+    .WithUrl("health-diag", "HealthDiag")
+    .WithUrl("healthchecks-ui", "HealthChecksUI");
 
-await builder.Build().RunAsync();
+await builder.Build().RunAsync().ConfigureAwait(false);

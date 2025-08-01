@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Security.Cryptography;
 
-namespace WebApi.Code.Monitor;
+namespace Core.Utils.HealthCheck;
 
-public class RandomHealthCheck : IHealthCheck
+public class FakeRandomHealthCheck : IHealthCheck
 {
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
         CancellationToken cancellationToken = default)

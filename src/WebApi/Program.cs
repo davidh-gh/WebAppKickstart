@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Net;
 using System.Threading.RateLimiting;
-using WebApi.Code.Monitor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,8 +29,8 @@ builder.Services.AddApiVersioning(options =>
 
 
 builder.Services.AddHealthChecks()
-    .AddCheck<RandomHealthCheck>("Site Health Check")
-    .AddCheck<RandomHealthCheck>("Database Health Check");
+    .AddCheck<FakeRandomHealthCheck>("Api Site Health Check")
+    .AddCheck<FakeRandomHealthCheck>("Api Database Health Check");
 
 builder.Services.AddResponseCaching(options =>
 {
@@ -92,11 +91,11 @@ app.UseAuthorization();
 
 app.UseResponseCaching();
 
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/health").AllowAnonymous();
 app.MapHealthChecks("/health-diag", new HealthCheckOptions
 {
-    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-});
+    ResponseWriter = UiResponseWriter.WriteHealthCheckUiResponse
+}).AllowAnonymous();
 
 app.MapControllers();
 

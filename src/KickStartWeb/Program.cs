@@ -1,4 +1,6 @@
 using Aspire.ServiceDefaults;
+using Core.Utils.HealthCheck;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,10 @@ builder.Services.AddHttpClient("api", options=>
     options.DefaultRequestHeaders.Add("Accept", "application/json");
 });
 
+builder.Services.AddHealthChecks()
+    .AddCheck<FakeRandomHealthCheck>("Web Site Health Check")
+    .AddCheck<FakeRandomHealthCheck>("Web Database Health Check");
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
@@ -40,6 +46,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseRouting();
 
 app.UseSession();
@@ -48,10 +55,16 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+app.MapHealthChecks("/health").AllowAnonymous();
+app.MapHealthChecks("/health-diag", new HealthCheckOptions
+{
+    ResponseWriter = UiResponseWriter.WriteHealthCheckUiResponse
+}).AllowAnonymous();
+
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
-await app.RunAsync();
+await app.RunAsync().ConfigureAwait(false);

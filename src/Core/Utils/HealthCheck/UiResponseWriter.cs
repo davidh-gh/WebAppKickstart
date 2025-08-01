@@ -4,53 +4,32 @@ using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Core.Utils.HealthCheck;
 
-public static class UIResponseWriter
+public static class UiResponseWriter
 {
-    private const string DEFAULT_CONTENT_TYPE = "application/json";
+    private const string DefaultContentType = "application/json";
 
-    private static readonly byte[] _emptyResponse = [(byte)'{', (byte)'}'];
-    private static readonly Lazy<JsonSerializerOptions> _options = new(CreateJsonOptions);
+    private static readonly byte[] EmptyResponse = [(byte)'{', (byte)'}'];
+    private static readonly Lazy<JsonSerializerOptions> Options = new(CreateJsonOptions);
 
-#pragma warning disable IDE1006 // Naming Styles
-    public static async Task WriteHealthCheckUIResponse(HttpContext httpContext, HealthReport report)
-#pragma warning restore IDE1006 // Naming Styles
+    [SuppressMessage("Design", "CA1062:Validate arguments of public methods")]
+    [SuppressMessage("ReSharper", "ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract")]
+    public static async Task WriteHealthCheckUiResponse(HttpContext httpContext, HealthReport report)
     {
         if (report != null)
         {
-#pragma warning disable CA1062
-            httpContext.Response.ContentType = DEFAULT_CONTENT_TYPE;
-#pragma warning restore CA1062
+            httpContext.Response.ContentType = DefaultContentType;
 
-            var uiReport = UIHealthReport.CreateFrom(report);
+            var uiReport = UiHealthReport.CreateFrom(report);
 
-            await JsonSerializer.SerializeAsync(httpContext.Response.Body, uiReport, _options.Value).ConfigureAwait(false);
+            await JsonSerializer.SerializeAsync(httpContext.Response.Body, uiReport, Options.Value).ConfigureAwait(false);
         }
         else
         {
-            await httpContext.Response.Body.WriteAsync(_emptyResponse).ConfigureAwait(false);
-        }
-    }
-
-#pragma warning disable IDE1006 // Naming Styles
-    public static async Task WriteHealthCheckUIResponseNoExceptionDetails(HttpContext httpContext, HealthReport report)
-#pragma warning restore IDE1006 // Naming Styles
-    {
-        if (report != null)
-        {
-#pragma warning disable CA1062
-            httpContext.Response.ContentType = DEFAULT_CONTENT_TYPE;
-#pragma warning restore CA1062
-
-            var uiReport = UIHealthReport.CreateFrom(report, _ => "Exception Occurred.");
-
-            await JsonSerializer.SerializeAsync(httpContext.Response.Body, uiReport, _options.Value).ConfigureAwait(false);
-        }
-        else
-        {
-            await httpContext.Response.Body.WriteAsync(_emptyResponse).ConfigureAwait(false);
+            await httpContext.Response.Body.WriteAsync(EmptyResponse).ConfigureAwait(false);
         }
     }
 
@@ -78,7 +57,7 @@ internal sealed class TimeSpanConverter : JsonConverter<TimeSpan>
 {
     public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        return default;
+        return TimeSpan.Zero;
     }
 
     public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)

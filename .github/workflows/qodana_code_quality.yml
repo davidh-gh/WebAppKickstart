@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches: # Specify your branches here
-      - main # The 'main' branch
-      - 'releases/*' # The release branches
+    branches:
+      - main
+      - 'releases/*'
 
 jobs:
   qodana:
@@ -24,6 +24,7 @@ jobs:
         with:
           pr-mode: false
           args: '--solution=WebKickStartApp.sln'
+          linter: jetbrains/qodana-cdnet:2025.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1670587391 }}
           QODANA_ENDPOINT: 'https://qodana.cloud'

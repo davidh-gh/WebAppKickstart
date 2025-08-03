@@ -1,8 +1,12 @@
 # WebAppKickstart
 
 ## Pipeline
+
+### SonarCloud
 1. Create new project in SonarCloud
 2. Add SonarCloud token to GitHub secrets
+
+### Qodana
 3. Create new project in Qodana
 4. Add Qodana token to GitHub secrets
 5. Copy .github/workflows/ or .gitlab-ci.yml to your repository

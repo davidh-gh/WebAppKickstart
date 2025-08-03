@@ -9,6 +9,8 @@ sn -k MyKey.snk  // constains both public and private keys
 sn -p MyKey.snk SigningKey.public.snk // contains only public key
 ```
 *Note: 
+- All the dependencies of the assembly must be signed in order to sign the assembly itself.
+- The `sn` tool is part of the .NET SDK, so ensure you have it installed.
 - You can use `sn -v` to verify the key file.*
 - Keep the private key file (`MyKey.snk`) secure and do not commit it to the repository. Add it to `.gitignore` if necessary.
 - The public key file (`SigningKey.public.snk`) can be shared or committed to the repository as needed.

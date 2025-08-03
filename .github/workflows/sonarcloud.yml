@@ -43,6 +43,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Restore SigningKey
+        run: echo "${{ secrets.STRONG_NAME_KEY_B64 }}" | base64 -d > DhKey.snk
+        
       - name: Analyze with SonarCloud
 
         # You can pin the exact commit or the version.
@@ -65,3 +68,7 @@ jobs:
             #-Dsonar.verbose= # optional, default is false
           # When you need the analysis to take place in a directory other than the one from which it was launched, default is .
           projectBaseDir: .
+
+      - name: Clean up Signing Key
+        if: always()
+        run: rm -f DhKey.snk

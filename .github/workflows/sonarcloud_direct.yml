@@ -51,6 +51,9 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
+      - name: Restore SigningKey
+        run: echo "${{ secrets.STRONG_NAME_KEY_B64 }}" | base64 -d > DhKey.snk
+
       - name: Install SonarScanner
         run: dotnet tool install --global dotnet-sonarscanner
 
@@ -84,3 +87,7 @@ jobs:
 
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
+      - name: Clean up Signing Key
+        if: always()
+        run: rm -f DhKey.snk

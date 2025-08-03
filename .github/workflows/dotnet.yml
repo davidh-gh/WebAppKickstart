@@ -22,7 +22,7 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: Restore DhKey.snk from GitHub secret
+      - name: Restore SigningKey
         run: echo "${{ secrets.STRONG_NAME_KEY_B64 }}" | base64 -d > DhKey.snk
 
       - name: Restore NuGet Packages
@@ -34,6 +34,6 @@ jobs:
       - name: Run Tests
         run: dotnet test --no-build --verbosity normal
 
-      - name: Clean up DhKey.snk
+      - name: Clean up Signing Key
         if: always()
         run: rm -f DhKey.snk

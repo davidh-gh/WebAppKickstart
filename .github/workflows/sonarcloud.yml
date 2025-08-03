@@ -51,7 +51,7 @@ jobs:
         run: echo "${{ secrets.STRONG_NAME_KEY_B64 }}" | base64 -d > DhKey.snk
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@latest
+        uses: SonarSource/sonarqube-scan-action@v5.3
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
         with:

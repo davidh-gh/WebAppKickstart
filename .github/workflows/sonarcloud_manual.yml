@@ -45,6 +45,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -71,7 +73,7 @@ jobs:
 
       - name: Save Project version to github output
         id: gh_project_version
-        run: echo "VERSION=${{ steps.project_version.outputs.assembly-version }}" >> $GITHUB_OUTPUT
+        run: echo "VERSION=${{ steps.project_version.outputs.assembly-version }}" >> $GITHUB_OUTPUT # This allows later steps in the workflow to reference this value as ${{ steps.gh_project_version.outputs.VERSION }}
 
       - name: Display github project version
         run: echo "Github project version is ${{ steps.gh_project_version.outputs.VERSION }}"

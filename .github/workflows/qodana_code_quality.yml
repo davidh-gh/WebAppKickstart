@@ -46,7 +46,7 @@ jobs:
       - name: Copy all coverage.json files from TestResults subfolders to .qodana/code-coverage
         run: |
           mkdir -p .qodana/code-coverage
-          find ./test/UnitTests/TestResults -type f -name coverage.json -exec cp {} .qodana/code-coverage/ \;
+          find ./test/UnitTests/TestResults -type f -name coverage.* -exec cp {} .qodana/code-coverage/ \;
 
       - name: List all coverage.json files with full path (2)
         run: find ${{ github.workspace }} -type f -name '*coverage*'

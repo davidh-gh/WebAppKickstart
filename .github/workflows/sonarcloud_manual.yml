@@ -109,17 +109,20 @@ jobs:
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
-      - name: List current directory
-        run: ls -la
+      - name: List all coverage.json files with full path
+        run: find ${{ github.workspace }} -type f -name '*coverage*'
 
-      - name: Copy qodana report to qodana directory
-        run: cp TestResults/coverage.json .qodana/code-coverage
+      - name: Copy all coverage.json files to .qodana/code-coverage
+        run: |
+          mkdir -p .qodana/code-coverage
+          find . -type f -name coverage.json -exec cp {} .qodana/code-coverage/ \;
 
       - name: Archive coverage data for Qodana
         uses: actions/upload-artifact@v4
         with:
           name: coverage.json
           path: .qodana/code-coverage
+          overwrite: true
 
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.1

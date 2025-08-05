@@ -24,6 +24,11 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
           fetch-depth: 0  # a full history is required for pull request analysis
 
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
       - name: Restore SigningKey
         run: echo "${{ secrets.STRONG_NAME_KEY_B64 }}" | base64 -d > DhKey.snk
 

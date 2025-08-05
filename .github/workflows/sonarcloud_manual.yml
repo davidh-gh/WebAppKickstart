@@ -87,9 +87,12 @@ jobs:
       - name: Show working dir
         run: ls -la
 
+      - name: Build solution
+        run: dotnet build --configuration Release
+
       - name: Run Unit Tests
         working-directory: ${{ github.workspace }}
-        run: dotnet test $TEST_PROJECT_FILE --logger "trx;logFileName=tests_results.trx" --logger:"junit;LogFilePath=junit-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose" -l "console;verbosity=detailed" --settings $TEST_PROJECT_COVERLET_SETTINGS
+        run: dotnet test $TEST_PROJECT_FILE --no-build --logger "trx;logFileName=tests_results.trx" --logger:"junit;LogFilePath=junit-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose" -l "console;verbosity=detailed" --settings $TEST_PROJECT_COVERLET_SETTINGS
 
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"

@@ -24,9 +24,10 @@
    </RunSettings>
    ```
 5. Running `dotnet test` will generate 
-   * `coverage.xml` (cobertura format)
-   * `coverage.json` (as coverlet for qodana) 
-   * `coverage.opencover.xml` for sonarcloud code coverage
+   * `coverage.xml` (cobertura format) (not defined)
+   * `coverage.json` (as coverlet) 
+   * `coverage.info` (as lcov for Qodana)
+   * `coverage.opencover.xml` for SonarCloud code coverage
 6. Upload `coverage.opencover.xml` to SonarCloud
 
 ### Qodana

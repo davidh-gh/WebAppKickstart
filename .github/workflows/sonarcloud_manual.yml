@@ -82,10 +82,21 @@ jobs:
         run: echo "Github project version is ${{ steps.gh_project_version.outputs.VERSION }}"
 
       - name: SonarScanner Begin
-        run: dotnet sonarscanner begin /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /o:"armaita" /d:sonar.qualitygate.wait=false /d:sonar.exclusions=**/*.xml /d:sonar.cpd.exclusions="**/ExpressionOperand.cs,**/CustomFile.cs" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.cs.vstest.reportsPaths="**/tests_results.trx" /d:sonar.verbose=true /d:sonar.branch.name=${{ github.ref_name }} /v:"${{ steps.project_version.outputs.assembly-version }}"
-
-      - name: Show working dir
-        run: ls -la
+        run: dotnet sonarscanner begin \
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
+          /k:"armaita_kickstartapp" \
+          /d:sonar.host.url="https://sonarcloud.io" \
+          /o:"armaita" \
+          /d:sonar.qualitygate.wait=false \
+          /d:sonar.sources=src \
+          /d:sonar.tests=test \
+          /d:sonar.exclusions=**/*.xml \
+          /d:sonar.cpd.exclusions="**/SitesController.cs,**/Error.cshtml" \
+          /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
+          /d:sonar.cs.vstest.reportsPaths="**/tests_results.trx" \
+          /d:sonar.verbose=true \
+          /d:sonar.branch.name=${{ github.ref_name }} \
+          /v:"${{ steps.project_version.outputs.assembly-version }}"
 
       - name: Build solution
         run: dotnet build --configuration Debug --no-incremental

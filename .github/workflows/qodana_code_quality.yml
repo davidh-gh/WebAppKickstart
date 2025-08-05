@@ -37,7 +37,9 @@ jobs:
 
       - name: Run Unit Tests
         working-directory: ${{ github.workspace }}
-        run: dotnet test $TEST_PROJECT_FILE --no-build --logger "trx;logFileName=tests_results.trx" /p:CollectCoverage=true /p:CoverletOutput=.qodana/code-coverage/ /p:CoverletOutputFormat=lcov
+        run: |
+          mkdir -p .qodana/code-coverage
+          dotnet test $TEST_PROJECT_FILE --no-build --logger "trx;logFileName=tests_results.trx" /p:CollectCoverage=true /p:CoverletOutput=.qodana/code-coverage/ /p:CoverletOutputFormat=lcov,json
 
       - name: List all coverage.json files with full path
         run: find ${{ github.workspace }} -type f -name '*coverage*'

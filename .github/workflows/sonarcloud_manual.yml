@@ -109,6 +109,12 @@ jobs:
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
+      - name: List current directory
+        run: ls -la
+
+      - name: Copy qodana report to qodana directory
+        run: cp TestResults/coverage.json .qodana/code-coverage
+
       - name: Archive coverage data for Qodana
         uses: actions/upload-artifact@v4
         with:

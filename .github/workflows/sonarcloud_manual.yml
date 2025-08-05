@@ -109,6 +109,21 @@ jobs:
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
+      - name: Archive coverage data for Qodana
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage.json
+          path: .qodana/code-coverage
+
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2025.1
+        with:
+          pr-mode: false
+          args: '--solution=WebKickStartApp.sln'
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1670587391 }}
+          QODANA_ENDPOINT: 'https://qodana.cloud'
+
       - name: Clean up Signing Key
         if: always()
         run: rm -f DhKey.snk

@@ -4,3 +4,17 @@ profile:
   name: qodana.recommended
 include:
   - name: CheckDependencyLicenses
+
+#failThreshold: <number>
+
+# failureConditions:
+#   severityThresholds:
+#     any: <number> # Total problems
+#     critical: <number> # Critical and other severities
+#     high: <number>
+#     moderate: <number>
+#     low: <number>
+#     info: <number>
+#   testCoverageThresholds:
+#     fresh: <number> # Fresh code coverage
+#     total: <number> # Total code coverage

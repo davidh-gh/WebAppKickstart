@@ -41,6 +41,9 @@ permissions:
 jobs:
   Analysis:
     runs-on: ubuntu-latest
+    env:
+      TEST_PROJECT_FILE: test/UnitTests/UnitTests.csproj
+      TEST_PROJECT_COVERLET_SETTINGS: test/UnitTests/coverlet.runsettings
 
     steps:
       - name: Checkout
@@ -79,13 +82,10 @@ jobs:
         run: echo "Github project version is ${{ steps.gh_project_version.outputs.VERSION }}"
 
       - name: SonarScanner Begin
-        run: dotnet sonarscanner begin /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /o:"armaita" /v:"${{ steps.project_version.outputs.assembly-version }}"
+        run: dotnet sonarscanner begin /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /k:"armaita_kickstartapp" /d:sonar.host.url="https://sonarcloud.io" /o:"armaita" /d:sonar.qualitygate.wait=false /d:sonar.exclusions=**/*.xml /d:sonar.cpd.exclusions="**/ExpressionOperand.cs,**/CustomFile.cs" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.cs.vstest.reportsPaths="**/tests_results.trx" /d:sonar.verbose=true /d:sonar.branch.name=$CI_COMMIT_REF_NAME /v:"${{ steps.project_version.outputs.assembly-version }}"
 
-      - name: Build Solution
-        run: dotnet build
-
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
+      - name: Run Unit Tests
+        run: dotnet test $TEST_PROJECT_FILE --logger "trx;logFileName=tests_results.trx" --logger:"junit;LogFilePath=junit-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose" -l "console;verbosity=detailed" --settings $TEST_PROJECT_COVERLET_SETTINGS
 
       - name: SonarScanner End
         run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
@@ -93,3 +93,9 @@ jobs:
       - name: Clean up Signing Key
         if: always()
         run: rm -f DhKey.snk
+
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate Coverage Report as HTML
+        run: reportgenerator -reports:**/coverage.opencover.xml -targetdir:CoverageReport -reporttypes:Html

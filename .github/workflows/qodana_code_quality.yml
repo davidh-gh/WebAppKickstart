@@ -72,7 +72,6 @@ jobs:
             --solution WebKickStartApp.sln \
             --baseline qodana.sarif.json \
             --baseline-include-absent \
-            --pr-mode false \
             --no-build
 
       - name: Show Qodana Report

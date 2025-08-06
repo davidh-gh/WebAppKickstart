@@ -74,8 +74,8 @@ jobs:
             --baseline-include-absent \
             --no-build
 
-      - name: Show Qodana Report
-        run: qodana show
+      - name: View Qodana Report
+        run: qodana view
 
       - name: Send Qodana Report to Cloud
         env:

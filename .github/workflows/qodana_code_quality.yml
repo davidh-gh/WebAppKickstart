@@ -60,6 +60,18 @@ jobs:
           compression-level: 0
           include-hidden-files: true
 
+      - name: Install Qodana scan
+        run: brew install jetbrains/utils/qodana
+
+      - name: Run Qodana CLI
+        run: |
+          qodana scan \
+            --solution WebKickStartApp.sln \
+            --baseline qodana.sarif.json \
+            --baseline-include-absent \
+            --pr-mode false \
+            --no-build
+
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.1
         with:

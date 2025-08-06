@@ -65,7 +65,6 @@ jobs:
         with:
           pr-mode: false
           args: |
-            --within-docker,false,
             --baseline,qodana.sarif.json,
             --baseline-include-absent
         env:

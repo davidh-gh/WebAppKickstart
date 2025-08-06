@@ -61,10 +61,15 @@ jobs:
           include-hidden-files: true
 
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2025.1
+        uses: JetBrains/qodana-action@v2025.2
         with:
           pr-mode: false
-          args: '--solution=WebKickStartApp.sln'
+          args: |
+            --linter,qodana-cdnet,
+            --within-docker,false,
+            --within-docker,false,
+            --baseline,qodana.sarif.json,
+            --solution=WebKickStartApp.sln
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1670587391 }}
           QODANA_ENDPOINT: 'https://qodana.cloud'

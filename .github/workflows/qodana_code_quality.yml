@@ -61,11 +61,10 @@ jobs:
           include-hidden-files: true
 
       - name: 'Qodana Scan'
-        uses: JetBrains/qodana-action@v2025.2
+        uses: JetBrains/qodana-action@v2025.1
         with:
           pr-mode: false
           args: |
-            --linter,qodana-cdnet,
             --within-docker,false,
             --baseline,qodana.sarif.json
         env:

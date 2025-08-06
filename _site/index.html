@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SonarCloud Test Report Separation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #004B8D;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Separating Unit and Acceptance Test Reports in SonarCloud</h1>
+
+<div class="section">
+    <h2>Overview</h2>
+    <p>SonarCloud does not natively differentiate between unit and acceptance (integration) tests. However, you can separate test reports manually by generating and uploading distinct coverage files for each type of test.</p>
+</div>
+
+<div class="section">
+    <h2>1. Generate Separate Reports</h2>
+    <p>Use <code>dotnet test</code> to generate coverage for each test project separately:</p>
+    <pre><code>dotnet test UnitTests/UnitTests.csproj --collect:"XPlat Code Coverage" --results-directory coverage/unit
+dotnet test AcceptanceTests/AcceptanceTests.csproj --collect:"XPlat Code Coverage" --results-directory coverage/acceptance</code></pre>
+</div>
+
+<div class="section">
+    <h2>2. Merge or Upload Separately</h2>
+    <p><strong>Option A: Merge Reports</strong> using <code>ReportGenerator</code>:</p>
+    <pre><code>reportgenerator -reports:coverage/**/coverage.opencover.xml -targetdir:coverage/merged -reporttypes:Opencover</code></pre>
+    <p>Then upload the merged report to SonarCloud:</p>
+    <pre><code>sonar.cs.opencover.reportsPaths=coverage/merged/coverage.opencover.xml</code></pre>
+
+    <p><strong>Option B: Separate Projects in SonarCloud</strong></p>
+    <p>Define separate SonarCloud project keys and properties:</p>
+    <pre><code>// sonar-project-unit.properties
+sonar.projectKey=yourproject-unit
+sonar.cs.opencover.reportsPaths=coverage/unit/coverage.opencover.xml</code></pre>
+
+    <pre><code>// sonar-project-acceptance.properties
+sonar.projectKey=yourproject-acceptance
+sonar.cs.opencover.reportsPaths=coverage/acceptance/coverage.opencover.xml</code></pre>
+    <p>Run scanner separately for each:</p>
+    <pre><code>dotnet-sonarscanner begin /k:"yourproject-unit"
+dotnet test UnitTests/UnitTests.csproj
+dotnet-sonarscanner end
+
+dotnet-sonarscanner begin /k:"yourproject-acceptance"
+dotnet test AcceptanceTests/AcceptanceTests.csproj
+dotnet-sonarscanner end</code></pre>
+</div>
+
+<div class="section">
+    <h2>Conclusion</h2>
+    <p>While SonarCloud does not distinguish test types internally, you can manually separate coverage by either merging reports or managing separate projects. This allows greater visibility and control over your test metrics.</p>
+</div>
+
+</body>
+</html>

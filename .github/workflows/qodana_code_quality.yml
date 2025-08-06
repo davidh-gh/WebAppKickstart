@@ -63,13 +63,12 @@ jobs:
       - name: Install Qodana CLI
         run: curl -fsSL https://jb.gg/qodana-cli/install | bash
 
-      - name: Init Qodana CLI
-        run: qodana init
+      # - name: Init Qodana CLI
+      #   run: qodana init
 
       - name: Run scan Qodana CLI
         run: |
           qodana scan \
-            --within-docker false \
             --solution WebKickStartApp.sln \
             --baseline qodana.sarif.json \
             --baseline-include-absent \

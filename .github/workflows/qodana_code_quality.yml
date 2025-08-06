@@ -67,9 +67,7 @@ jobs:
           args: |
             --linter,qodana-cdnet,
             --within-docker,false,
-            --within-docker,false,
-            --baseline,qodana.sarif.json,
-            --solution=WebKickStartApp.sln
+            --baseline,qodana.sarif.json
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1670587391 }}
           QODANA_ENDPOINT: 'https://qodana.cloud'

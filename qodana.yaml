@@ -2,9 +2,13 @@ version: "1.0"
 linter: jetbrains/qodana-cdnet:2025.2-eap
 profile:
   name: qodana.recommended:NetCoverageInspection
+dotnet:
+  solution: WebKickStartApp.sln
 include:
   - name: CheckDependencyLicenses
   - name: VulnerableLibrariesLocal
+hardcodedPasswords:
+  reportDefaultSuspiciousVariableNames: true
 
 
 

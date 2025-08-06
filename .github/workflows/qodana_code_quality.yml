@@ -66,13 +66,11 @@ jobs:
       - name: Init Qodana CLI
         run: qodana init
 
+      - name: Help scan Qodana CLI
+        run: qodana scan --help
+
       - name: Run scan Qodana CLI
-        run: |
-          qodana scan \
-            --solution WebKickStartApp.sln \
-            --baseline qodana.sarif.json \
-            --baseline-include-absent \
-            --no-build
+        run: qodana scan --solution WebKickStartApp.sln --baseline qodana.sarif.json --baseline-include-absent --within-docker=false
 
       - name: View Qodana Report
         run: qodana view

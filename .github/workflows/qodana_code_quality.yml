@@ -60,17 +60,30 @@ jobs:
           compression-level: 0
           include-hidden-files: true
 
-      - name: Install Qodana scan
-        run: brew install jetbrains/utils/qodana
+      - name: Install Qodana CLI
+        run: curl -fsSL https://jb.gg/qodana-cli/install | bash
 
-      - name: Run Qodana CLI
+      - name: Init Qodana CLI
+        run: qodana init
+
+      - name: Run scan Qodana CLI
         run: |
           qodana scan \
+            --within-docker false \
             --solution WebKickStartApp.sln \
             --baseline qodana.sarif.json \
             --baseline-include-absent \
             --pr-mode false \
             --no-build
+
+      - name: Show Qodana Report
+        run: qodana show
+
+      - name: Send Qodana Report to Cloud
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_1670587391 }}
+          QODANA_ENDPOINT: 'https://qodana.cloud'
+        run: qodana send
 
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2025.1

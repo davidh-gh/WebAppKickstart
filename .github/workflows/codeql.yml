@@ -59,6 +59,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.0.x
+
+    - name: Restore SigningKey
+      run: echo "${{ secrets.STRONG_NAME_KEY_B64 }}" | base64 -d > DhKey.snk
+
     # Add any setup steps before running the `github/codeql-action/init` action.
     # This includes steps like installing compilers or runtimes (`actions/setup-node`
     # or others). This is typically only required for manual builds.
@@ -98,3 +106,7 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+
+    - name: Clean up Signing Key
+      if: always()
+      run: rm -f DhKey.snk

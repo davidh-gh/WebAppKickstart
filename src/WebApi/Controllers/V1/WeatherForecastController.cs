@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
-using WebApi.Code;
 using WebApi.Code.Monitor;
 using WebApi.Models;
 

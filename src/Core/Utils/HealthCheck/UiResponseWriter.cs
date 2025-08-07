@@ -12,7 +12,7 @@ public static class UiResponseWriter
 {
     private const string DefaultContentType = "application/json";
 
-    private static readonly byte[] EmptyResponse = [(byte)'{', (byte)'}'];
+    private static readonly byte[] EmptyResponse = "{}"u8.ToArray();
     private static readonly Lazy<JsonSerializerOptions> Options = new(CreateJsonOptions);
 
     [SuppressMessage("Design", "CA1062:Validate arguments of public methods")]

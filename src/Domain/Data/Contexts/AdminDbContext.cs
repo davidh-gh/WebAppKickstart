@@ -1,14 +1,11 @@
 ﻿using Domain.Data.Tables;
-using System.Diagnostics;
 
 namespace Domain.Data.Contexts;
 
 using Microsoft.EntityFrameworkCore;
 
-public class AdminDbContext : DbContext
+public class AdminDbContext(DbContextOptions<AdminDbContext> options) : DbContext(options)
 {
-    public AdminDbContext(DbContextOptions<AdminDbContext> options) : base(options) { }
-
     public DbSet<AdminUserDb> AdminUsers { get; set; }
 
     public DbSet<AdminUserRoleDb> AdminUserRoles { get; set; }

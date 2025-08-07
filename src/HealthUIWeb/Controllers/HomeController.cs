@@ -5,19 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace HealthUIWeb.Controllers;
 
-public class HomeController : Controller
+public class HomeController(ILogger<HomeController> logger) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
     [SuppressMessage("Performance", "CA1848:Use the LoggerMessage delegates")]
     public IActionResult Index()
     {
-        _logger.LogInformation("Index");
+        logger.LogInformation("Index");
         return View();
     }
 

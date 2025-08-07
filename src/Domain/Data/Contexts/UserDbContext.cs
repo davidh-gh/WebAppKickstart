@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Data.Contexts;
 
-public class UserDbContext : DbContext
+public class UserDbContext(DbContextOptions<UserDbContext> options) : DbContext(options)
 {
-    public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
-
     public DbSet<UserDb> AppUsers { get; set; }
 
     public DbSet<ModuleDb> Modules { get; set; }

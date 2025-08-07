@@ -1,7 +1,6 @@
 ﻿using Asp.Versioning;
 using Domain.Data.Tables;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Code;
 using WebApi.Code.Monitor;
 
 namespace WebApi.Controllers.V1;

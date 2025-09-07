@@ -9,6 +9,7 @@
 		<LangVersion>latest</LangVersion>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <NoWarn>CA1812</NoWarn>
 
 		<Authors>Author Name</Authors>
 		<Company>Company Name</Company>

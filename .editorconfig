@@ -258,7 +258,7 @@ dotnet_diagnostic.CA2007.severity = suggestion
 dotnet_diagnostic.CA1515.severity = none
 
 # CA1812 Avoid uninstantiated internal classes
-dotnet_diagnostic.CA1812.severity = suggestion
+dotnet_diagnostic.CA1812.severity = none
 
 # IDE0058 Expression value is never used	
 dotnet_diagnostic.IDE0058.severity = none

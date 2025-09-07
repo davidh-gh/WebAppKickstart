@@ -1,6 +1,6 @@
 namespace WebApi.Models;
 
-internal class WeatherForecast
+internal sealed class WeatherForecast
 {
     public DateOnly Date { get; set; }
 

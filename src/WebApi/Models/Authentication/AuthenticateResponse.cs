@@ -1,3 +1,3 @@
 namespace WebApi.Models.Authentication;
 
-internal record AuthenticateResponse(string Token);
+internal sealed record AuthenticateResponse(string Token);

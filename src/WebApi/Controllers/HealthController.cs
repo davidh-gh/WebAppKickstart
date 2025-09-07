@@ -11,7 +11,7 @@ namespace WebApi.Controllers;
 [ApiController]
 [ApiVersionNeutral]
 [Route("api/[controller]")]
-internal class HealthController(ILogger<WeatherForecastController> logger) : ControllerBase
+internal sealed class HealthController(ILogger<WeatherForecastController> logger) : ControllerBase
 {
     // the url for this endpoint is: /api/Health
     [EndpointSummary("Get Health")]

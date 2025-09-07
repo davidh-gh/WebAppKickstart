@@ -9,7 +9,7 @@ namespace WebApi.Controllers.V1;
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
 [AllowAnonymous]
-public class WeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase
+internal sealed class WeatherForecastController(ILogger<WeatherForecastController> logger) : ControllerBase
 {
     private static readonly string[] Summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
 

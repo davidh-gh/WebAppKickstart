@@ -1,3 +1,3 @@
-﻿namespace WebApi.Models.Authentication;
+namespace WebApi.Models.Authentication;
 
-public record AuthenticateResponse(string Token);
+internal record AuthenticateResponse(string Token);

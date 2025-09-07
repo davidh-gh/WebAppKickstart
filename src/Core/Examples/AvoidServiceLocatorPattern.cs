@@ -1,4 +1,4 @@
-﻿using Core.Examples.Interfaces;
+using Core.Examples.Interfaces;
 
 namespace Core.Examples
 {

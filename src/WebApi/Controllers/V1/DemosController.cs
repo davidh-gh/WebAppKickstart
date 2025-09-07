@@ -8,7 +8,7 @@ namespace WebApi.Controllers.V1;
 
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiController]
-public class DemosController(ILogger<DemosController> logger) : ControllerBase
+internal sealed class DemosController(ILogger<DemosController> logger) : ControllerBase
 {
     // GET - retrieve record or list of records
     // POST - create record
@@ -24,7 +24,7 @@ public class DemosController(ILogger<DemosController> logger) : ControllerBase
     {
         LogMessages.LogDemosGet(logger, null);
 
-        var userId = User.Claims.FirstOrDefault(c=> c.Type == ClaimTypes.NameIdentifier)?.Value; // Get the user ID from the claims, which is saved as JwtRegisteredClaimNames.Sub
+        var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value; // Get the user ID from the claims, which is saved as JwtRegisteredClaimNames.Sub
 
         var nbr = RandomNumberGenerator.GetInt32(1, 10);
 
@@ -42,7 +42,7 @@ public class DemosController(ILogger<DemosController> logger) : ControllerBase
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)] // this applies to unique ids
     public IActionResult GetById(int id)
     {
-        if(id is < 0 or > 100)
+        if (id is < 0 or > 100)
         {
             LogMessages.LogDemosGetByIdInvalidId(logger, id, null);
             return BadRequest("Id must be between 0 and 100");

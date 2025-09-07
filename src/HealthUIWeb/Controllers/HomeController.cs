@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace HealthUIWeb.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+internal sealed class HomeController(ILogger<HomeController> logger) : Controller
 {
     [SuppressMessage("Performance", "CA1848:Use the LoggerMessage delegates")]
     public IActionResult Index()

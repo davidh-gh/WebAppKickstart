@@ -15,6 +15,15 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.WebHost.UseKestrel(options =>
+{
+    options.AddServerHeader = false;
+});
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
 
 builder.Services.AddApiVersioning(options =>
 {

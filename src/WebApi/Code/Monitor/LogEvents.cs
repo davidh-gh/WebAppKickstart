@@ -1,6 +1,6 @@
-﻿namespace WebApi.Code.Monitor
+namespace WebApi.Code.Monitor
 {
-    public enum LogEvents
+    internal enum LogEvents
     {
         None = 0,
         HealthPing = 1,

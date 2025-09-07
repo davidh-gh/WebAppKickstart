@@ -1,6 +1,6 @@
-﻿namespace WebApi.Code.Monitor
+namespace WebApi.Code.Monitor
 {
-    public static class LogMessages
+    internal static class LogMessages
     {
         // HealthCheckController
         public static readonly Action<ILogger, Exception?> LogHealthPing =

@@ -1,3 +1,3 @@
-﻿namespace WebApi.Models.Authentication;
+namespace WebApi.Models.Authentication;
 
-public record AuthenticateUserData(int UserId, string UserName);
+internal record AuthenticateUserData(int UserId, string UserName);

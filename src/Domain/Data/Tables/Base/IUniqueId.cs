@@ -1,4 +1,4 @@
-﻿namespace Domain.Data.Tables.Base;
+namespace Domain.Data.Tables.Base;
 
 public interface IUniqueId
 {

@@ -1,4 +1,4 @@
-﻿namespace Core.Examples.Interfaces
+namespace Core.Examples.Interfaces
 {
     public interface IDemo
     {

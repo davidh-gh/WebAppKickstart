@@ -1,4 +1,4 @@
-﻿namespace Core.Utils.HealthCheck;
+namespace Core.Utils.HealthCheck;
 
 public class UiHealthReportEntry
 {

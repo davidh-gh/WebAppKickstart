@@ -20,6 +20,16 @@ builder.Services.AddHealthChecksUI(opts =>
     //  setup.AddCustomStylesheet("dotnet.css"); // add custom stylesheet
 }).AddInMemoryStorage();
 
+builder.WebHost.UseKestrel(options =>
+{
+    options.AddServerHeader = false; // Disable the Server header for security reasons (default: Kestrel)
+});
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

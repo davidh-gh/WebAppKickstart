@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace KickStartWeb.Controllers;
 
-public class DemosController(IHttpClientFactory clientFactory) : Controller
+internal sealed class DemosController(IHttpClientFactory clientFactory) : Controller
 {
     [HttpGet]
     [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any, NoStore = false)]
@@ -30,7 +30,7 @@ public class DemosController(IHttpClientFactory clientFactory) : Controller
         {
             return BadRequest(ModelState);
         }
-        if(id is < 0 or > 100)
+        if (id is < 0 or > 100)
         {
             // Log the invalid ID request
             return BadRequest("Id must be between 0 and 100");

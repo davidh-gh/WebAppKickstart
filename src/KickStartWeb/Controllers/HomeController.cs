@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace KickStartWeb.Controllers;
 
-public class HomeController(ILogger<HomeController> logger, IConfiguration config, IHttpClientFactory clientFactory) : Controller
+internal sealed class HomeController(ILogger<HomeController> logger, IConfiguration config, IHttpClientFactory clientFactory) : Controller
 {
     public IActionResult Index()
     {
@@ -53,7 +53,7 @@ public class HomeController(ILogger<HomeController> logger, IConfiguration confi
 
         try
         {
-            var response = await client.PostAsJsonAsync("api/v2/Authentication/token", model);
+            var response = await client.PostAsJsonAsync("api/v2/Authentication/token", model).ConfigureAwait(false);
 
             if (!response.IsSuccessStatusCode)
             {

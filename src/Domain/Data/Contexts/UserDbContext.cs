@@ -1,21 +1,21 @@
-﻿using Domain.Data.Tables;
+using Domain.Data.Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Data.Contexts;
 
 public class UserDbContext(DbContextOptions<UserDbContext> options) : DbContext(options)
 {
-    public DbSet<UserDb> AppUsers { get; set; }
+    public DbSet<UserDb>? AppUsers { get; set; }
 
-    public DbSet<ModuleDb> Modules { get; set; }
+    public DbSet<ModuleDb>? Modules { get; set; }
 
-    public DbSet<SubModuleDb> SubModules { get; set; }
+    public DbSet<SubModuleDb>? SubModules { get; set; }
 
-    public DbSet<UserModuleSubscriptionDb> ModuleSubscriptions { get; set; }
+    public DbSet<UserModuleSubscriptionDb>? ModuleSubscriptions { get; set; }
 
-    public DbSet<UserSubModuleSubscriptionDb> SubModuleSubscriptions { get; set; }
+    public DbSet<UserSubModuleSubscriptionDb>? SubModuleSubscriptions { get; set; }
 
-    public DbSet<UserPermissionDb> UserPermissions { get; set; }
+    public DbSet<UserPermissionDb>? UserPermissions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

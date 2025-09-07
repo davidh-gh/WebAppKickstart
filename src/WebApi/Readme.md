@@ -385,3 +385,38 @@ app.MapControllers();
 
 await app.RunAsync().ConfigureAwait(false);
 ```
+
+## Dependencies
+Use Directory.Build.props to keep project packages consistent.
+
+To check that all DI dependecies are correct, check during build with:
+```charp
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
+```
+
+## Web project best practices
+* Keep controllers thin, move business logic to services in Domain project.
+* Use DTOs (Data Transfer Objects) for request and response models to decouple API from domain models.
+* Implement proper error handling and return meaningful HTTP status codes.
+* Use logging to track important events and errors.
+* Secure your API with authentication and authorization.
+* Write unit tests for controllers and services to ensure code quality and reliability.
+* Document your API using OpenAPI/Swagger for easy consumption by clients.
+* Use versioning for your API to manage changes and maintain backward compatibility.
+* Regularly review and refactor your code to improve maintainability and performance.
+* Monitor your API using health checks and logging to ensure it is running smoothly and to quickly identify issues.
+* Consider using middleware for cross-cutting concerns like logging, error handling, and authentication.
+* Use async/await for asynchronous operations to improve scalability and responsiveness.
+* Follow SOLID principles and design patterns to create a clean and maintainable codebase.
+* Keep security in mind, validate inputs, and protect against common vulnerabilities like SQL injection and XSS.
+* Disable default Server Header to avoid exposing server information:
+```csharp
+builder.WebHost.UseKestrel(options =>
+{
+    options.AddServerHeader = false;
+});
+```

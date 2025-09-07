@@ -1,4 +1,4 @@
-﻿using Domain.Data.Tables.Base;
+using Domain.Data.Tables.Base;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Data.Tables;

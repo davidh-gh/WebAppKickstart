@@ -1,4 +1,5 @@
-﻿using Asp.Versioning;
+using System.Diagnostics.CodeAnalysis;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Code.Monitor;
@@ -6,10 +7,11 @@ using WebApi.Controllers.V1;
 
 namespace WebApi.Controllers;
 
+[SuppressMessage("Maintainability", "CA1515:Consider making public types internal")]
 [ApiController]
 [ApiVersionNeutral]
 [Route("api/[controller]")]
-public class HealthController(ILogger<WeatherForecastController> logger) : ControllerBase
+internal class HealthController(ILogger<WeatherForecastController> logger) : ControllerBase
 {
     // the url for this endpoint is: /api/Health
     [EndpointSummary("Get Health")]

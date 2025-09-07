@@ -15,7 +15,7 @@ namespace WebApi.Controllers.V1;
 [ApiVersion("1.0")]
 [ApiVersion("2.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class AuthenticationController(IConfiguration config, ILogger<AuthenticationController> logger) : ControllerBase
+internal sealed class AuthenticationController(IConfiguration config, ILogger<AuthenticationController> logger) : ControllerBase
 {
     // api/authentication/token
     [HttpPost("token")]

@@ -1,4 +1,4 @@
-﻿using Asp.Versioning;
+using Asp.Versioning;
 using Domain.Data.Tables;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Code.Monitor;
@@ -9,7 +9,7 @@ namespace WebApi.Controllers.V2;
 [ApiController]
 [ApiVersion("2.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class SitesController(ILogger<WeatherForecastController> logger) : ControllerBase
+internal sealed class SitesController(ILogger<WeatherForecastController> logger) : ControllerBase
 {
     private static readonly Action<ILogger, Exception?> LogGetSite =
         LoggerMessage.Define(LogLevel.Information, new EventId((int)LogEvents.None, "GetSite"), "Get weather forecast for days");

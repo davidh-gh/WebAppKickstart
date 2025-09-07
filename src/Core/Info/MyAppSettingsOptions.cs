@@ -1,4 +1,4 @@
-﻿namespace Core.Info
+namespace Core.Info
 {
     public class MyAppSettingsOptions
     {

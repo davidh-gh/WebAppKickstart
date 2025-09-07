@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Core.Utils.HealthCheck;
 
@@ -13,7 +13,7 @@ public class UiHealthReport(Dictionary<string, UiHealthReportEntry> entries, Tim
     public TimeSpan TotalDuration { get; set; } = totalDuration;
 
     // ReSharper disable once MemberCanBePrivate.Global - must be public for serialization
-    public Dictionary<string, UiHealthReportEntry> Entries { get;  } = entries;
+    public Dictionary<string, UiHealthReportEntry> Entries { get; } = entries;
 
     public static UiHealthReport CreateFrom(HealthReport report, Func<Exception, string>? exceptionMessage = null)
     {

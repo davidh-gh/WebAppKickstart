@@ -1,4 +1,4 @@
-﻿using Domain.Data.Tables.Base;
+using Domain.Data.Tables.Base;
 using Microsoft.AspNetCore.Identity;
 using System.Diagnostics.CodeAnalysis;
 

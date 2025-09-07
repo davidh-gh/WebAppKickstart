@@ -1,4 +1,4 @@
-﻿using Domain.Data.Tables;
+using Domain.Data.Tables;
 
 namespace Domain.Data.Contexts;
 
@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 public class AdminDbContext(DbContextOptions<AdminDbContext> options) : DbContext(options)
 {
-    public DbSet<AdminUserDb> AdminUsers { get; set; }
+    public DbSet<AdminUserDb>? AdminUsers { get; set; }
 
-    public DbSet<AdminUserRoleDb> AdminUserRoles { get; set; }
+    public DbSet<AdminUserRoleDb>? AdminUserRoles { get; set; }
 
-    public DbSet<AdminUserRolePermissionDb> AdminUserRolePermissions { get; set; }
+    public DbSet<AdminUserRolePermissionDb>? AdminUserRolePermissions { get; set; }
 
-    public DbSet<AdminExternalLoginDb> ExternalLogins { get; set; }
+    public DbSet<AdminExternalLoginDb>? ExternalLogins { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

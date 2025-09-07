@@ -6,6 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
+builder.WebHost.UseKestrel(options =>
+{
+    options.AddServerHeader = false; // Disable the Server header for security reasons (default: Kestrel)
+});
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
+
 var memCollection = new List<KeyValuePair<string, string?>>
 {
     new("MySettings:Setting1", "Settings from memory collection"),
@@ -22,7 +32,7 @@ builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddHttpClient("api", options=>
+builder.Services.AddHttpClient("api", options =>
 {
     var baseUrl = builder.Configuration["Api:BaseUrl"];
     options.BaseAddress = new Uri(baseUrl!);

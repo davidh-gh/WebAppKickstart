@@ -1,4 +1,4 @@
-﻿namespace Domain.Data.Tables;
+namespace Domain.Data.Tables;
 
 public class UserPermissionDb
 {

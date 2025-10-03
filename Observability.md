@@ -42,7 +42,7 @@
 
 ToDo:
 * Serilog
-* OpenTelemetry -> Grafana
+* OpenTelemetry -> Grafana Cloud
 * HealthChecks
 * Tracing
 * OData

@@ -36,6 +36,8 @@
 5. Copy .github/workflows/ or .gitlab-ci.yml to your repository
 6. Test
 
+## Grafana Cloud
+
 ### Interesting
 1. Check Api/Code/LogEvents enum for defining LoggerMessage
 2. Check definition and setting EventId for LoggerMessage

@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
 
         <SignAssembly>false</SignAssembly>
+
+        <UserSecretsId>62ba0b5d-6589-4e97-afaa-0f96233e86bc</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
